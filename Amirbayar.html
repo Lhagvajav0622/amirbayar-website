@@ -681,6 +681,23 @@ section{position:relative;}
 .empty .t{font-size:18px;font-weight:600;color:var(--navy);}
 .empty .d{font-size:14px;margin-top:6px;}
 
+.show-more-wrap{text-align:center;margin:8px 0 28px;}
+.show-more-btn{
+  display:inline-flex;align-items:center;gap:10px;
+  font-family:'Inter',sans-serif;font-size:13px;font-weight:600;
+  letter-spacing:.08em;text-transform:uppercase;
+  color:var(--navy);
+  background:#fff;
+  border:1.5px solid #d8dde6;
+  border-radius:8px;
+  padding:13px 28px;
+  cursor:pointer;
+  transition:all .25s var(--ease);
+}
+.show-more-btn:hover{background:var(--navy);color:#fff;border-color:var(--navy);}
+.show-more-btn svg{transition:transform .3s var(--ease);}
+.show-more-btn.open svg{transform:rotate(180deg);}
+
 /* ============================ PROJECTS ============================ */
 .projects{background:var(--navy);}
 .proj-grid{
@@ -1835,6 +1852,45 @@ const MAX_PARTICLES = 25;
 /* ==========================================================
    PRODUCT RENDERING
    ========================================================== */
+const SHOW_LIMIT = 6;
+
+function pcard(it, i, svg){
+  return `
+    <a href="assets/price-list.pdf" download class="pcard reveal" data-tilt data-delay="${(i*0.06).toFixed(2)}s" data-cursor>
+      <div class="shine"></div>
+      <div class="pcard-vis">${svg}</div>
+      <div class="pcard-body">
+        <div class="pcard-code">${it.code}</div>
+        <div class="pcard-spec">${it.spec}</div>
+        <div class="pcard-row">
+          <div class="pcard-price">${it.price}<span class="t">₮</span></div>
+          <span class="pcard-dl" data-cursor aria-label="Download price list">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            <span class="pcard-dl-t" data-i18n-runtime="dl">PDF татах</span>
+          </span>
+        </div>
+      </div>
+    </a>`;
+}
+
+function toggleMore(id, btn){
+  const el = document.getElementById(id);
+  const open = el.style.display === "none";
+  el.style.display = open ? "grid" : "none";
+  btn.classList.toggle("open", open);
+  const lang = document.documentElement.getAttribute("lang") === "en" ? "en" : "mn";
+  if(open){
+    btn.innerHTML = (lang === "en" ? "Collapse" : "Хураах") +
+      ` <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>`;
+    observeReveal();
+    rebindCards();
+  } else {
+    const n = parseInt(btn.dataset.hidden);
+    btn.innerHTML = (lang === "en" ? `Show all (${n} more)` : `Бүгдийг үзэх (${n} нэмэлт)`) +
+      ` <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>`;
+  }
+}
+
 function renderProducts(tab, query=""){
   const panel = document.getElementById("tabPanel");
   const data = PRODUCTS[tab];
@@ -1850,36 +1906,38 @@ function renderProducts(tab, query=""){
   const q = query.trim().toLowerCase();
   let html = "";
   let total = 0;
+  let gIdx = 0;
   for(const grp of data){
     const filtered = grp.items.filter(it =>
       !q || it.code.toLowerCase().includes(q) || it.spec.toLowerCase().includes(q) || it.price.replace(",","").includes(q.replace(",",""))
     );
     if(filtered.length === 0) continue;
     total += filtered.length;
+    const visible = filtered.slice(0, SHOW_LIMIT);
+    const hidden  = filtered.slice(SHOW_LIMIT);
+    const moreId  = `more-${tab}-${gIdx}`;
     html += `
       <div class="cat-header">
         <div class="cat-header-t">${grp.header}</div>
         <div class="cat-header-c">${filtered.length} ТӨРӨЛ</div>
       </div>
       <div class="pgrid">
-        ${filtered.map((it, i) => `
-          <a href="assets/price-list.pdf" download class="pcard reveal" data-tilt data-delay="${(i*0.06).toFixed(2)}s" data-cursor>
-            <div class="shine"></div>
-            <div class="pcard-vis">${grp.svg}</div>
-            <div class="pcard-body">
-              <div class="pcard-code">${it.code}</div>
-              <div class="pcard-spec">${it.spec}</div>
-              <div class="pcard-row">
-                <div class="pcard-price">${it.price}<span class="t">₮</span></div>
-                <span class="pcard-dl" data-cursor aria-label="Download price list">
-                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-                  <span class="pcard-dl-t" data-i18n-runtime="dl">PDF татах</span>
-                </span>
-              </div>
-            </div>
-          </a>
-        `).join("")}
+        ${visible.map((it, i) => pcard(it, i, grp.svg)).join("")}
       </div>`;
+    if(hidden.length > 0){
+      html += `
+      <div class="pgrid" id="${moreId}" style="display:none">
+        ${hidden.map((it, i) => pcard(it, SHOW_LIMIT + i, grp.svg)).join("")}
+      </div>
+      <div class="show-more-wrap">
+        <button class="show-more-btn" data-hidden="${hidden.length}"
+          onclick="toggleMore('${moreId}', this)">
+          Бүгдийг үзэх (${hidden.length} нэмэлт)
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+      </div>`;
+    }
+    gIdx++;
   }
   if(total === 0){
     html = `
