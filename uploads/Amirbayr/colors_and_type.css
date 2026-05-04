@@ -1,0 +1,200 @@
+/* ============================================================
+   Амирбаяр ХХК — Design Tokens
+   Brand: Mongolian PPR pipe manufacturer
+   Tagline: Чанар бол хэмнэлт
+   ============================================================ */
+
+/* Webfonts (Google Fonts has full Cyrillic for both DM Serif Display + DM Sans) */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&family=Roboto+Slab:wght@400;500;700&family=Roboto+Mono:wght@400;500&display=swap');
+
+:root {
+  /* ----- Color: Brand (matches real logo) ----- */
+  --ds-red:            #EB1E24;  /* PRIMARY brand red — from logo */
+  --ds-red-hover:      #C8161B;
+  --ds-red-press:      #A1101A;
+  --ds-red-light:      #FFE8E9;  /* hover fills, info bg */
+  --ds-navy:           #052678;  /* logo navy — accent, hero text */
+  --ds-navy-deep:      #031A4F;  /* deep variant for dark surfaces */
+  --ds-navy-soft:      #0E3399;  /* lighter navy, link hover */
+  --ds-blue-light:     #E8EEFC;  /* hover fills */
+  --ds-green:          #2F9E5E;  /* status active, success */
+  --ds-green-light:    #E6F4EC;
+
+  /* ----- Color: Neutrals ----- */
+  --ds-fg:             #1A1A24;  /* primary text */
+  --ds-fg-muted:       #4A5568;  /* body text, labels */
+  --ds-fg-subtle:      #6B7A8F;  /* captions, helper */
+  --ds-border:         #DDE5EF;  /* dividers, card borders */
+  --ds-border-strong:  #C8D3E2;  /* card hover border */
+  --ds-bg:             #F7F9FC;  /* page background */
+  --ds-bg-elevated:    #FFFFFF;  /* cards, surfaces */
+  --ds-bg-subtle:      #F0F4FA;  /* zebra rows, code blocks */
+
+  /* ----- Type: Families ----- */
+  --ds-font-display:   'Roboto Slab', 'Noto Serif', Georgia, serif;
+  --ds-font-body:      'Roboto', 'Helvetica Neue', Arial, sans-serif;
+  --ds-font-mono:      'Roboto Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+
+  /* ----- Type: Scale ----- */
+  --ds-text-display:   52px;
+  --ds-text-h1:        36px;
+  --ds-text-h2:        28px;
+  --ds-text-h3:        20px;
+  --ds-text-body:      16px;
+  --ds-text-small:     13px;
+  --ds-text-label:     11px;   /* uppercase kickers */
+
+  /* ----- Type: Weights ----- */
+  --ds-w-light:        300;
+  --ds-w-regular:      400;
+  --ds-w-medium:       500;
+  --ds-w-semibold:     600;
+  --ds-w-bold:         700;
+
+  /* ----- Type: Line heights ----- */
+  --ds-lh-tight:       1.1;   /* display, h1 */
+  --ds-lh-snug:        1.25;  /* h2, h3 */
+  --ds-lh-normal:      1.5;   /* body */
+  --ds-lh-loose:       1.7;   /* long-form */
+
+  /* ----- Type: Tracking ----- */
+  --ds-track-label:    0.12em;
+  --ds-track-tight:    -0.01em;
+
+  /* ----- Spacing (4px base) ----- */
+  --ds-space-1:   4px;
+  --ds-space-2:   8px;
+  --ds-space-3:   12px;
+  --ds-space-4:   16px;
+  --ds-space-6:   24px;
+  --ds-space-8:   32px;
+  --ds-space-12:  48px;
+  --ds-space-16:  64px;
+  --ds-space-20:  80px;
+  --ds-space-24:  96px;
+
+  /* ----- Radii ----- */
+  --ds-radius-sm:   4px;   /* inputs, small chips */
+  --ds-radius-md:   8px;   /* cards, buttons */
+  --ds-radius-pill: 999px;
+
+  /* ----- Shadows ----- */
+  --ds-shadow-card:  0 1px 2px rgba(13, 27, 42, 0.04);
+  --ds-shadow-hover: 0 4px 16px rgba(13, 27, 42, 0.08);
+  --ds-shadow-modal: 0 24px 64px rgba(13, 27, 42, 0.18);
+
+  /* ----- Motion ----- */
+  --ds-ease:        cubic-bezier(0.2, 0, 0, 1);
+  --ds-dur-fast:    150ms;
+  --ds-dur-base:    200ms;
+  --ds-dur-slow:    300ms;
+
+  /* ----- Layout ----- */
+  --ds-page-max:    1280px;
+  --ds-page-gutter: 5%;
+}
+
+/* ============================================================
+   Dark mode token map
+   ============================================================ */
+[data-theme="dark"] {
+  --ds-fg:            #F7F9FC;
+  --ds-fg-muted:      #B8C4D6;
+  --ds-fg-subtle:     #8A97AC;
+  --ds-border:        #1F2D40;
+  --ds-border-strong: #2C3D55;
+  --ds-bg:            #0A1420;
+  --ds-bg-elevated:   #142235;
+  --ds-bg-subtle:     #1A2A3F;
+  --ds-blue-light:    #1A2C46;
+  --ds-shadow-card:   0 1px 2px rgba(0, 0, 0, 0.4);
+  --ds-shadow-hover:  0 4px 16px rgba(0, 0, 0, 0.5);
+}
+
+/* ============================================================
+   Base & semantic element styles
+   ============================================================ */
+body {
+  font-family: var(--ds-font-body);
+  font-size: var(--ds-text-body);
+  font-weight: var(--ds-w-regular);
+  line-height: var(--ds-lh-normal);
+  color: var(--ds-fg);
+  background: var(--ds-bg);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+.ds-display {
+  font-family: var(--ds-font-display);
+  font-size: var(--ds-text-display);
+  font-weight: var(--ds-w-regular);
+  line-height: var(--ds-lh-tight);
+  letter-spacing: var(--ds-track-tight);
+  color: var(--ds-fg);
+}
+
+h1, .ds-h1 {
+  font-family: var(--ds-font-display);
+  font-size: var(--ds-text-h1);
+  font-weight: var(--ds-w-regular);
+  line-height: var(--ds-lh-tight);
+  letter-spacing: var(--ds-track-tight);
+  color: var(--ds-fg);
+  margin: 0;
+}
+
+h2, .ds-h2 {
+  font-family: var(--ds-font-display);
+  font-size: var(--ds-text-h2);
+  font-weight: var(--ds-w-regular);
+  line-height: var(--ds-lh-snug);
+  color: var(--ds-fg);
+  margin: 0;
+}
+
+h3, .ds-h3 {
+  font-family: var(--ds-font-body);
+  font-size: var(--ds-text-h3);
+  font-weight: var(--ds-w-semibold);
+  line-height: var(--ds-lh-snug);
+  color: var(--ds-fg);
+  margin: 0;
+}
+
+p, .ds-body {
+  font-size: var(--ds-text-body);
+  line-height: var(--ds-lh-normal);
+  color: var(--ds-fg-muted);
+  margin: 0;
+}
+
+.ds-small {
+  font-size: var(--ds-text-small);
+  line-height: var(--ds-lh-normal);
+  color: var(--ds-fg-muted);
+}
+
+.ds-label {
+  font-size: var(--ds-text-label);
+  font-weight: var(--ds-w-semibold);
+  letter-spacing: var(--ds-track-label);
+  text-transform: uppercase;
+  color: var(--ds-fg-subtle);
+}
+
+code, .ds-mono {
+  font-family: var(--ds-font-mono);
+  font-size: 0.92em;
+  color: var(--ds-fg);
+  background: var(--ds-bg-subtle);
+  padding: 2px 6px;
+  border-radius: var(--ds-radius-sm);
+}
+
+a {
+  color: var(--ds-blue);
+  text-decoration: none;
+  transition: color var(--ds-dur-base) var(--ds-ease);
+}
+a:hover { color: var(--ds-blue-hover); }
