@@ -664,14 +664,20 @@ section{position:relative;}
   font-size:22px;color:var(--red);letter-spacing:-.01em;line-height:1;
 }
 .pcard-price .t{font-size:14px;font-weight:500;color:var(--gray);margin-left:2px;}
-.pcard-dl{
-  display:inline-flex;align-items:center;gap:6px;
-  font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;
-  color:var(--gray);
-  transition:color .25s var(--ease),transform .25s var(--ease);
+.pcard-dl-btn{
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:'Inter',sans-serif;font-size:12px;font-weight:600;
+  letter-spacing:.04em;
+  color:#fff;
+  background:var(--red);
+  border-radius:6px;
+  padding:9px 16px;
+  text-decoration:none;
+  transition:background .2s var(--ease),transform .2s var(--ease);
+  white-space:nowrap;
 }
-.pcard:hover .pcard-dl{color:var(--red);transform:translateX(2px);}
-.pcard-dl svg{flex-shrink:0;}
+.pcard-dl-btn:hover{background:var(--red-deep);transform:translateY(-1px);}
+.pcard-dl-btn svg{flex-shrink:0;}
 
 .empty{
   padding:80px 20px;text-align:center;color:var(--gray);
@@ -1856,21 +1862,20 @@ const SHOW_LIMIT = 6;
 
 function pcard(it, i, svg){
   return `
-    <a href="assets/price-list.pdf" download class="pcard reveal" data-tilt data-delay="${(i*0.06).toFixed(2)}s" data-cursor>
+    <div class="pcard reveal" data-tilt data-delay="${(i*0.06).toFixed(2)}s">
       <div class="shine"></div>
       <div class="pcard-vis">${svg}</div>
       <div class="pcard-body">
         <div class="pcard-code">${it.code}</div>
         <div class="pcard-spec">${it.spec}</div>
         <div class="pcard-row">
-          <div class="pcard-price">${it.price}<span class="t">₮</span></div>
-          <span class="pcard-dl" data-cursor aria-label="Download price list">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-            <span class="pcard-dl-t" data-i18n-runtime="dl">PDF татах</span>
-          </span>
+          <a href="assets/price-list.pdf" download class="pcard-dl-btn" data-cursor>
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Үнийн санал татах
+          </a>
         </div>
       </div>
-    </a>`;
+    </div>`;
 }
 
 function toggleMore(id, btn){
