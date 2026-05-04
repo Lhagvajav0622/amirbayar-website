@@ -406,6 +406,27 @@ p{margin:0;}
   .hero-cert-strip{position:static;}
 }
 
+@media(max-width:600px){
+  .hero{padding:90px 5% 48px;}
+  .hero h1{font-size:clamp(32px,9vw,48px);line-height:1.0;}
+  .hero-kicker{font-size:9px;padding:6px 10px;margin-bottom:20px;flex-wrap:wrap;}
+  .hero-body{font-size:14px;margin-top:20px;}
+  .hero-buttons{flex-direction:column;align-items:flex-start;gap:10px;margin-top:24px;}
+  .hero-buttons .btn{width:100%;justify-content:center;}
+  .hero-visual{height:260px;order:-1;display:flex;align-items:center;justify-content:center;}
+  #magnetic-logo{width:220px;height:220px;margin:0 auto;}
+  .ml-ring.outer{inset:0;}
+  .ml-ring.mid{inset:22px;}
+  .ml-ring.inner{inset:44px;}
+  .ml-core{inset:66px;}
+  .ml-pulse{inset:66px;}
+  .hero-stats{grid-template-columns:repeat(2,1fr);gap:16px;margin-top:36px;}
+  .hero-stat-value{font-size:20px;}
+  .hero-cert-strip{position:static;padding:14px 5%;}
+  .hero-cert-row{gap:12px;font-size:9px;}
+  .par-layer{display:none;}
+}
+
 /* ============================ SECTIONS ============================ */
 section{position:relative;}
 .sec-pad{padding:120px 5%;}
