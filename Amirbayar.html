@@ -1709,43 +1709,48 @@ function renderFeaturedStrip(prods){
       </div>
     </div>`).join("");
 
-  // Duplicate for seamless infinite loop
-  track.innerHTML = cardHTML + cardHTML;
-  section.style.display = "";
+  // Repeat enough copies so the seam is never on-screen
+  // (minimum 8 copies, ensures smooth loop even with few products)
+  const copies = Math.max(8, Math.ceil(window.innerWidth * 3 / (prods.length * 240)));
+  let repeated = "";
+  for(let i = 0; i < copies; i++) repeated += cardHTML;
+  track.innerHTML = repeated;
 
-  // Cancel previous slider if any
+  section.style.display = "";
   if(_featSliderRAF){ cancelAnimationFrame(_featSliderRAF); _featSliderRAF=null; }
   _featSliderPos = 0;
 
-  // Wait a frame so scrollWidth is measurable
-  requestAnimationFrame(() => initFeaturedSlider(track));
+  // Two rAF ticks so layout is fully computed before measuring
+  requestAnimationFrame(() => requestAnimationFrame(() => initFeaturedSlider(track, prods.length)));
 }
 
-function initFeaturedSlider(track){
-  const outer     = document.getElementById("featured-track-outer");
-  let pos         = _featSliderPos;
-  let dragging    = false;
-  let dragX       = 0;
-  let dragStart   = 0;
-  let pauseTimer  = null;
-  const SPEED     = 0.45; // px per frame
+function initFeaturedSlider(track, origCount){
+  const outer    = document.getElementById("featured-track-outer");
+  let pos        = 0;
+  let dragging   = false;
+  let dragX      = 0, dragStart = 0;
+  let pauseTimer = null;
+  const SPEED    = 0.38; // px per frame — slow and calm
 
-  function half(){ return track.scrollWidth / 2; }
+  // Reset point = offsetLeft of the (origCount)-th card (first duplicate)
+  // This is pixel-perfect: no trailing-gap mismatch
+  const firstDupe = track.children[origCount];
+  const resetAt   = firstDupe ? firstDupe.offsetLeft : track.scrollWidth / 2;
 
   function tick(){
     if(!dragging){
       pos += SPEED;
-      if(pos >= half()) pos -= half();
+      if(pos >= resetAt) pos -= resetAt; // seamless — same visual, no jump
       track.scrollLeft = pos;
     }
-    _featSliderPos  = pos;
-    _featSliderRAF  = requestAnimationFrame(tick);
+    _featSliderPos = pos;
+    _featSliderRAF = requestAnimationFrame(tick);
   }
   _featSliderRAF = requestAnimationFrame(tick);
 
   function resume(){ clearTimeout(pauseTimer); pauseTimer = setTimeout(() => { dragging=false; }, 1400); }
 
-  // Mouse
+  // Mouse drag
   outer.addEventListener("mousedown", e => {
     dragging=true; dragX=e.clientX; dragStart=pos;
     clearTimeout(pauseTimer); e.preventDefault();
@@ -1753,12 +1758,12 @@ function initFeaturedSlider(track){
   document.addEventListener("mousemove", e => {
     if(!dragging) return;
     const diff = dragX - e.clientX;
-    pos = ((dragStart + diff) % half() + half()) % half();
+    pos = ((dragStart + diff) % resetAt + resetAt) % resetAt;
     track.scrollLeft = pos;
   });
   document.addEventListener("mouseup", () => { if(dragging) resume(); });
 
-  // Touch
+  // Touch drag
   outer.addEventListener("touchstart", e => {
     dragging=true; dragX=e.touches[0].clientX; dragStart=pos;
     clearTimeout(pauseTimer);
@@ -1766,7 +1771,7 @@ function initFeaturedSlider(track){
   outer.addEventListener("touchmove", e => {
     if(!dragging) return;
     const diff = dragX - e.touches[0].clientX;
-    pos = ((dragStart + diff) % half() + half()) % half();
+    pos = ((dragStart + diff) % resetAt + resetAt) % resetAt;
     track.scrollLeft = pos;
   }, {passive:true});
   outer.addEventListener("touchend", () => { if(dragging) resume(); }, {passive:true});
