@@ -142,6 +142,24 @@ body{font-family:'Inter',system-ui,sans-serif;background:#f0f4fb;color:#1a2540;-
 .empty-state{text-align:center;padding:48px 28px;color:#9aa8bf;font-size:14px;background:#fff;border-radius:14px;border:1px solid #dde5f2;}
 .empty-state svg{margin:0 auto 12px;display:block;color:#c5d3ea;}
 
+/* FEATURED TOGGLE */
+.feat-toggle{display:inline-flex;align-items:center;gap:7px;cursor:pointer;user-select:none;}
+.feat-toggle input{display:none;}
+.feat-toggle-track{
+  width:36px;height:20px;border-radius:999px;background:#dde5f2;
+  position:relative;flex-shrink:0;transition:background .2s;
+}
+.feat-toggle-track::after{
+  content:'';position:absolute;width:16px;height:16px;border-radius:50%;
+  background:#fff;top:2px;left:2px;transition:transform .2s;
+  box-shadow:0 1px 3px rgba(0,0,0,.18);
+}
+.feat-toggle input:checked ~ .feat-toggle-track{background:#CC1E1E;}
+.feat-toggle input:checked ~ .feat-toggle-track::after{transform:translateX(16px);}
+.feat-toggle-label{font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:#9aa8bf;transition:color .2s;}
+.feat-toggle input:checked ~ .feat-toggle-track + .feat-toggle-label,
+.feat-toggle:has(input:checked) .feat-toggle-label{color:#CC1E1E;}
+
 /* TOAST */
 #toast{position:fixed;bottom:28px;right:28px;z-index:999;display:flex;align-items:center;gap:10px;background:#082260;color:#fff;padding:14px 20px;border-radius:10px;font-size:14px;font-weight:600;box-shadow:0 8px 28px rgba(8,34,96,.35);transform:translateY(80px);opacity:0;transition:transform .3s cubic-bezier(.23,1,.32,1),opacity .3s ease;pointer-events:none;max-width:calc(100vw - 56px);}
 #toast.show{transform:translateY(0);opacity:1;}
@@ -331,6 +349,7 @@ let DB = null;
 const PROD_IMAGES  = {};   // key → data URL or asset path
 const PROD_COLUMNS = {};   // key → [{id, label}, ...]
 let   NEW_PROD_IMAGE = "";
+let   FEATURED_KEYS  = []; // keys of featured products
 
 /* ============================================================
    HELPERS
@@ -592,6 +611,11 @@ function appendSection(prod){
 
       <div class="section-head-spacer"></div>
       <div class="section-head-actions">
+        <label class="feat-toggle" title="Нүүр хуудсанд онцлох бүтээгдэхүүнд нэмэх">
+          <input type="checkbox" id="feat-cb-${key}" onchange="toggleFeatured('${key}')"/>
+          <span class="feat-toggle-track"></span>
+          <span class="feat-toggle-label">Онцлох</span>
+        </label>
         <button class="add-row-btn" onclick="addRow('${key}')">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
             <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
@@ -768,7 +792,7 @@ function initFirebase(){
     document.getElementById("pageSubText").textContent =
       "Firebase тохиргоо хийгдээгүй — өөрчлөлт зөвхөн локалд хадгалагдана.";
     renderAllSections(DEFAULT_PRODUCTS);
-    return;
+    return; // no featured loading without DB
   }
   function loadScript(src, cb){
     const s = document.createElement("script");
@@ -817,8 +841,10 @@ function initFirebase(){
               if(ai!==-1) return -1; if(bi!==-1) return 1; return 0;
             });
             renderAllSections(prods);
+            loadFeaturedState();
           } else {
             renderAllSections(DEFAULT_PRODUCTS);
+            loadFeaturedState();
           }
         }).catch(err => {
           console.error(err);
@@ -829,8 +855,48 @@ function initFirebase(){
         console.error(e);
         renderAllSections(DEFAULT_PRODUCTS);
       }
+
+      function loadFeaturedState(){
+        if(!DB) return;
+        DB.ref("featured").once("value").then(fsnap => {
+          let keys = fsnap.val();
+          if(keys && !Array.isArray(keys)) keys = Object.values(keys);
+          FEATURED_KEYS = keys || [];
+          FEATURED_KEYS.forEach(k => {
+            const cb = document.getElementById("feat-cb-"+k);
+            if(cb) cb.checked = true;
+          });
+        });
+      }
     });
   });
+}
+
+/* ============================================================
+   FEATURED
+   ============================================================ */
+function toggleFeatured(key){
+  const cb = document.getElementById("feat-cb-"+key);
+  if(!cb) return;
+  if(cb.checked){
+    if(!FEATURED_KEYS.includes(key)) FEATURED_KEYS.push(key);
+  } else {
+    FEATURED_KEYS = FEATURED_KEYS.filter(k => k !== key);
+  }
+  saveFeatured();
+}
+
+function saveFeatured(){
+  const lbl = document.getElementById("feat-save-lbl");
+  if(lbl) lbl.textContent = "…";
+  if(!DB){
+    showToast("Онцлох жагсаалт хадгалагдлаа (локал)");
+    if(lbl) lbl.textContent = "";
+    return;
+  }
+  DB.ref("featured").set(FEATURED_KEYS)
+    .then(() => { showToast("Онцлох бүтээгдэхүүн хадгалагдлаа ✓"); if(lbl) lbl.textContent = ""; })
+    .catch(err => { showToast("Алдаа: "+err.message, true); if(lbl) lbl.textContent = ""; });
 }
 
 /* ============================================================

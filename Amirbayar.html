@@ -728,6 +728,66 @@ section{position:relative;}
   margin-top:14px;font-weight:500;
 }
 
+/* ============================ FEATURED STRIP ============================ */
+.featured-section{background:var(--navy);padding:64px 0 0;overflow:hidden;}
+.featured-inner{padding:0 5% 28px;}
+.featured-eyebrow{
+  font-size:10px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--red);margin-bottom:10px;
+}
+.featured-heading{
+  font-size:clamp(20px,2.8vw,28px);font-weight:800;color:#fff;
+  letter-spacing:-.02em;line-height:1.1;
+}
+.featured-track-outer{overflow:hidden;padding:4px 0 40px;cursor:grab;user-select:none;}
+.featured-track-outer:active{cursor:grabbing;}
+.featured-track{
+  display:flex;gap:18px;
+  overflow-x:scroll;scrollbar-width:none;
+  padding:8px 5%;
+  scroll-behavior:auto;
+  -webkit-overflow-scrolling:touch;
+}
+.featured-track::-webkit-scrollbar{display:none;}
+.feat-card{
+  flex-shrink:0;width:200px;
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.09);
+  border-radius:14px;overflow:hidden;
+  cursor:pointer;
+  transition:transform .3s var(--ease),border-color .3s,background .3s;
+}
+.feat-card:hover{
+  transform:translateY(-5px);
+  border-color:rgba(204,30,30,.45);
+  background:rgba(255,255,255,.08);
+}
+.feat-card-img{
+  height:130px;overflow:hidden;
+  background:rgba(255,255,255,.04);
+}
+.feat-card-img img{
+  width:100%;height:100%;object-fit:cover;display:block;
+  transition:transform .4s var(--ease);
+}
+.feat-card:hover .feat-card-img img{transform:scale(1.07);}
+.feat-card-body{padding:14px 15px 16px;}
+.feat-card-badge{
+  display:inline-flex;align-items:center;gap:4px;
+  font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+  padding:3px 8px;border-radius:999px;margin-bottom:8px;
+}
+.feat-card-badge.cw{background:rgba(8,34,96,.55);color:#7fb0e8;border:1px solid rgba(26,92,200,.35);}
+.feat-card-badge.hw{background:rgba(204,30,30,.2);color:#e89090;border:1px solid rgba(204,30,30,.35);}
+.feat-card-name{font-size:13px;font-weight:700;color:#fff;line-height:1.3;}
+.feat-card-arrow{
+  margin-top:9px;font-size:10px;font-weight:600;letter-spacing:.06em;
+  color:rgba(255,255,255,.35);
+  display:flex;align-items:center;gap:4px;
+  transition:color .2s,gap .2s;
+}
+.feat-card:hover .feat-card-arrow{color:var(--red);gap:7px;}
+
 /* ============================ CONTACT ============================ */
 .contact{background:var(--navy2);}
 .contact-grid{
@@ -994,6 +1054,17 @@ footer{
       <span><span class="cdot"></span>DIN 8077:8078:2008</span>
       <span style="color:#fff;">BLUE OCEAN · Mongolia</span>
     </div>
+  </div>
+</section>
+
+<!-- FEATURED STRIP -->
+<section class="featured-section" id="featured-section" style="display:none">
+  <div class="featured-inner">
+    <div class="featured-eyebrow">онцлох бүтээгдэхүүнүүд</div>
+    <div class="featured-heading">Онцлох бүтээгдэхүүнүүд</div>
+  </div>
+  <div class="featured-track-outer" id="featured-track-outer">
+    <div class="featured-track" id="featured-track"></div>
   </div>
 </section>
 
@@ -1590,10 +1661,105 @@ function toggleTable(key){
 }
 
 /* ==========================================================
+   FEATURED STRIP
+   ========================================================== */
+let _featSliderRAF = null;
+let _featSliderPos = 0;
+
+function renderFeaturedStrip(prods){
+  const section = document.getElementById("featured-section");
+  const track   = document.getElementById("featured-track");
+  if(!section || !track) return;
+  if(!prods || prods.length === 0){ section.style.display="none"; return; }
+
+  const cardHTML = prods.map(p => `
+    <div class="feat-card" onclick="scrollToProducts()">
+      <div class="feat-card-img">
+        <img src="${p.image||''}" alt="${p.name||''}" onerror="this.style.opacity='.2'"/>
+      </div>
+      <div class="feat-card-body">
+        <div class="feat-card-badge ${p.badgeType||'cw'}">${p.badge||''}</div>
+        <div class="feat-card-name">${p.name||''}</div>
+        <div class="feat-card-arrow">
+          Дэлгэрэнгүй
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </div>
+      </div>
+    </div>`).join("");
+
+  // Duplicate for seamless infinite loop
+  track.innerHTML = cardHTML + cardHTML;
+  section.style.display = "";
+
+  // Cancel previous slider if any
+  if(_featSliderRAF){ cancelAnimationFrame(_featSliderRAF); _featSliderRAF=null; }
+  _featSliderPos = 0;
+
+  // Wait a frame so scrollWidth is measurable
+  requestAnimationFrame(() => initFeaturedSlider(track));
+}
+
+function initFeaturedSlider(track){
+  const outer     = document.getElementById("featured-track-outer");
+  let pos         = _featSliderPos;
+  let dragging    = false;
+  let dragX       = 0;
+  let dragStart   = 0;
+  let pauseTimer  = null;
+  const SPEED     = 0.45; // px per frame
+
+  function half(){ return track.scrollWidth / 2; }
+
+  function tick(){
+    if(!dragging){
+      pos += SPEED;
+      if(pos >= half()) pos -= half();
+      track.scrollLeft = pos;
+    }
+    _featSliderPos  = pos;
+    _featSliderRAF  = requestAnimationFrame(tick);
+  }
+  _featSliderRAF = requestAnimationFrame(tick);
+
+  function resume(){ clearTimeout(pauseTimer); pauseTimer = setTimeout(() => { dragging=false; }, 1400); }
+
+  // Mouse
+  outer.addEventListener("mousedown", e => {
+    dragging=true; dragX=e.clientX; dragStart=pos;
+    clearTimeout(pauseTimer); e.preventDefault();
+  });
+  document.addEventListener("mousemove", e => {
+    if(!dragging) return;
+    const diff = dragX - e.clientX;
+    pos = ((dragStart + diff) % half() + half()) % half();
+    track.scrollLeft = pos;
+  });
+  document.addEventListener("mouseup", () => { if(dragging) resume(); });
+
+  // Touch
+  outer.addEventListener("touchstart", e => {
+    dragging=true; dragX=e.touches[0].clientX; dragStart=pos;
+    clearTimeout(pauseTimer);
+  }, {passive:true});
+  outer.addEventListener("touchmove", e => {
+    if(!dragging) return;
+    const diff = dragX - e.touches[0].clientX;
+    pos = ((dragStart + diff) % half() + half()) % half();
+    track.scrollLeft = pos;
+  }, {passive:true});
+  outer.addEventListener("touchend", () => { if(dragging) resume(); }, {passive:true});
+}
+
+function scrollToProducts(){
+  document.getElementById("products")?.scrollIntoView({behavior:"smooth"});
+}
+
+/* ==========================================================
    FIREBASE LIVE LOADER
    ========================================================== */
 function tryLoadFirebase(){
   renderProductCards(); // show defaults immediately
+  renderFeaturedStrip(LIVE_PRODUCTS); // show all as default featured
   if(FB_CONFIG.apiKey === "YOUR_API_KEY") return;
   function loadScript(src, cb){
     const s = document.createElement("script");
@@ -1631,6 +1797,17 @@ function tryLoadFirebase(){
           LIVE_PRODUCTS.forEach(p => {
             const w = document.getElementById("table-"+p.key);
             if(w && w.classList.contains("open")) renderTable(p.key);
+          });
+          // Load featured list and update strip
+          firebase.database().ref("featured").once("value").then(fsnap => {
+            let keys = fsnap.val();
+            if(keys && !Array.isArray(keys)) keys = Object.values(keys);
+            if(keys && keys.length){
+              const fp = keys.map(k => LIVE_PRODUCTS.find(p => p.key===k)).filter(Boolean);
+              renderFeaturedStrip(fp.length ? fp : LIVE_PRODUCTS);
+            } else {
+              renderFeaturedStrip(LIVE_PRODUCTS);
+            }
           });
         });
       }catch(e){ console.warn("Firebase init error:", e); }
