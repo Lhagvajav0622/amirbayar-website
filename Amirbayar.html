@@ -1126,78 +1126,8 @@ footer{
       <p class="products-sub reveal">Халуун болон хүйтэн усны PPR хоолой — EN ISO 15874:2013, DIN 8077/8078 стандарт. Үнийн хүснэгтийг үзэхийн тулд бүтээгдэхүүн дээр дарна уу.</p>
     </div>
 
-    <div class="prod-cards">
-      <!-- COLD WATER PIPE -->
-      <div class="prod-card reveal" data-tilt>
-        <div class="shine"></div>
-        <div class="prod-card-img">
-          <img src="assets/pipes-cw.jpg" alt="Хүйтэн усны хоолой"/>
-          <div class="prod-card-badge cw"><span class="bdot"></span>PN12.5 · S4</div>
-        </div>
-        <div class="prod-card-body">
-          <div class="prod-card-title">Хүйтэн усны хоолой</div>
-          <div class="prod-card-desc">Cold Water Pipe · Ø16–160 мм · 4 м урт · ISO 15874</div>
-          <button class="prod-card-btn" id="btn-cw" onclick="toggleTable('cw')" data-cursor>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="4" rx="1"/><rect x="3" y="9" width="18" height="4" rx="1"/><rect x="3" y="15" width="18" height="4" rx="1"/></svg>
-            Үнийн хүснэгт
-            <svg class="arr" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
-          </button>
-        </div>
-        <div class="price-table-wrap" id="table-cw">
-          <div class="price-table-inner">
-            <div class="price-table-hdr">
-              <div class="price-table-hdr-t">Хүйтэн усны хоолой — Үнийн жагсаалт</div>
-            </div>
-            <table class="price-table">
-              <thead><tr>
-                <th>№</th>
-                <th>Барааны код</th>
-                <th>Хэмжээ</th>
-                <th>S класс</th>
-                <th>PN</th>
-                <th>Нэгж үнэ (₮)</th>
-              </tr></thead>
-              <tbody id="tbody-cw"></tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-
-      <!-- HOT WATER PIPE -->
-      <div class="prod-card reveal" data-tilt data-delay="0.12s">
-        <div class="shine"></div>
-        <div class="prod-card-img">
-          <img src="assets/pipes-blue.jpg" alt="Халуун усны хоолой"/>
-          <div class="prod-card-badge hw"><span class="bdot"></span>PN20 · S2.5</div>
-        </div>
-        <div class="prod-card-body">
-          <div class="prod-card-title">Халуун усны хоолой</div>
-          <div class="prod-card-desc">Hot Water Pipe · Ø20–110 мм · 4 м урт · ISO 15874</div>
-          <button class="prod-card-btn" id="btn-hw" onclick="toggleTable('hw')" data-cursor>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="4" rx="1"/><rect x="3" y="9" width="18" height="4" rx="1"/><rect x="3" y="15" width="18" height="4" rx="1"/></svg>
-            Үнийн хүснэгт
-            <svg class="arr" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
-          </button>
-        </div>
-        <div class="price-table-wrap" id="table-hw">
-          <div class="price-table-inner">
-            <div class="price-table-hdr">
-              <div class="price-table-hdr-t">Халуун усны хоолой — Үнийн жагсаалт</div>
-            </div>
-            <table class="price-table">
-              <thead><tr>
-                <th>№</th>
-                <th>Барааны код</th>
-                <th>Хэмжээ</th>
-                <th>S класс</th>
-                <th>PN</th>
-                <th>Нэгж үнэ (₮)</th>
-              </tr></thead>
-              <tbody id="tbody-hw"></tbody>
-            </table>
-          </div>
-        </div>
-      </div>
+    <div class="prod-cards" id="prod-cards-container">
+      <!-- product cards rendered dynamically by JS -->
     </div>
 
     <div id="price-cta" class="price-cta reveal">
@@ -1537,42 +1467,98 @@ const FB_CONFIG = {
 /* ==========================================================
    DEFAULT PRODUCT DATA  (shown when Firebase is not yet set up)
    ========================================================== */
-const DEFAULT_PRODUCTS = {
-  cw: [
-    { code:"PPR-CW/S4/16×2.2",   size:"Ø16 × 2.2 мм · 4 м",   sclass:"S4", pn:"PN12.5", price:"1,800" },
-    { code:"PPR-CW/S4/20×2.5",   size:"Ø20 × 2.5 мм · 4 м",   sclass:"S4", pn:"PN12.5", price:"2,800" },
-    { code:"PPR-CW/S4/25×3.5",   size:"Ø25 × 3.5 мм · 4 м",   sclass:"S4", pn:"PN12.5", price:"4,000" },
-    { code:"PPR-CW/S4/32×4.4",   size:"Ø32 × 4.4 мм · 4 м",   sclass:"S4", pn:"PN12.5", price:"7,000" },
-    { code:"PPR-CW/S4/40×5.5",   size:"Ø40 × 5.5 мм · 4 м",   sclass:"S4", pn:"PN12.5", price:"10,000" },
-    { code:"PPR-CW/S4/50×6.9",   size:"Ø50 × 6.9 мм · 4 м",   sclass:"S4", pn:"PN12.5", price:"15,000" },
-    { code:"PPR-CW/S4/63×8.6",   size:"Ø63 × 8.6 мм · 4 м",   sclass:"S4", pn:"PN12.5", price:"22,000" },
-    { code:"PPR-CW/S4/75×10.3",  size:"Ø75 × 10.3 мм · 4 м",  sclass:"S4", pn:"PN12.5", price:"32,000" },
-    { code:"PPR-CW/S4/90×12.3",  size:"Ø90 × 12.3 мм · 4 м",  sclass:"S4", pn:"PN12.5", price:"46,000" },
-    { code:"PPR-CW/S4/110×15",   size:"Ø110 × 15 мм · 4 м",   sclass:"S4", pn:"PN12.5", price:"68,000" },
-    { code:"PPR-CW/S4/160×21.9", size:"Ø160 × 21.9 мм · 4 м", sclass:"S4", pn:"PN12.5", price:"145,000" }
-  ],
-  hw: [
-    { code:"PPR-HW/S2.5/20×3.4",   size:"Ø20 × 3.4 мм · 4 м",   sclass:"S2.5", pn:"PN20", price:"3,500" },
-    { code:"PPR-HW/S2.5/25×4.2",   size:"Ø25 × 4.2 мм · 4 м",   sclass:"S2.5", pn:"PN20", price:"5,100" },
-    { code:"PPR-HW/S2.5/32×5.4",   size:"Ø32 × 5.4 мм · 4 м",   sclass:"S2.5", pn:"PN20", price:"8,500" },
-    { code:"PPR-HW/S2.5/40×6.7",   size:"Ø40 × 6.7 мм · 4 м",   sclass:"S2.5", pn:"PN20", price:"13,000" },
-    { code:"PPR-HW/S2.5/50×8.3",   size:"Ø50 × 8.3 мм · 4 м",   sclass:"S2.5", pn:"PN20", price:"19,000" },
-    { code:"PPR-HW/S2.5/63×10.5",  size:"Ø63 × 10.5 мм · 4 м",  sclass:"S2.5", pn:"PN20", price:"30,000" },
-    { code:"PPR-HW/S2.5/75×12.5",  size:"Ø75 × 12.5 мм · 4 м",  sclass:"S2.5", pn:"PN20", price:"44,000" },
-    { code:"PPR-HW/S2.5/90×15",    size:"Ø90 × 15 мм · 4 м",    sclass:"S2.5", pn:"PN20", price:"63,000" },
-    { code:"PPR-HW/S2.5/110×18.3", size:"Ø110 × 18.3 мм · 4 м", sclass:"S2.5", pn:"PN20", price:"94,000" }
-  ]
-};
+const DEFAULT_PRODUCTS = [
+  {
+    key: "cw",
+    name: "Хүйтэн усны хоолой",
+    desc: "Cold Water Pipe · Ø16–160 мм · 4 м урт · ISO 15874",
+    badge: "PN12.5 · S4",
+    badgeType: "cw",
+    image: "assets/pipes-cw.jpg",
+    items: [
+      { code:"PPR-CW/S4/16×2.2",   size:"Ø16 × 2.2 мм · 4 м",   sclass:"S4", pn:"PN12.5", price:"1,800" },
+      { code:"PPR-CW/S4/20×2.5",   size:"Ø20 × 2.5 мм · 4 м",   sclass:"S4", pn:"PN12.5", price:"2,800" },
+      { code:"PPR-CW/S4/25×3.5",   size:"Ø25 × 3.5 мм · 4 м",   sclass:"S4", pn:"PN12.5", price:"4,000" },
+      { code:"PPR-CW/S4/32×4.4",   size:"Ø32 × 4.4 мм · 4 м",   sclass:"S4", pn:"PN12.5", price:"7,000" },
+      { code:"PPR-CW/S4/40×5.5",   size:"Ø40 × 5.5 мм · 4 м",   sclass:"S4", pn:"PN12.5", price:"10,000" },
+      { code:"PPR-CW/S4/50×6.9",   size:"Ø50 × 6.9 мм · 4 м",   sclass:"S4", pn:"PN12.5", price:"15,000" },
+      { code:"PPR-CW/S4/63×8.6",   size:"Ø63 × 8.6 мм · 4 м",   sclass:"S4", pn:"PN12.5", price:"22,000" },
+      { code:"PPR-CW/S4/75×10.3",  size:"Ø75 × 10.3 мм · 4 м",  sclass:"S4", pn:"PN12.5", price:"32,000" },
+      { code:"PPR-CW/S4/90×12.3",  size:"Ø90 × 12.3 мм · 4 м",  sclass:"S4", pn:"PN12.5", price:"46,000" },
+      { code:"PPR-CW/S4/110×15",   size:"Ø110 × 15 мм · 4 м",   sclass:"S4", pn:"PN12.5", price:"68,000" },
+      { code:"PPR-CW/S4/160×21.9", size:"Ø160 × 21.9 мм · 4 м", sclass:"S4", pn:"PN12.5", price:"145,000" }
+    ]
+  },
+  {
+    key: "hw",
+    name: "Халуун усны хоолой",
+    desc: "Hot Water Pipe · Ø20–110 мм · 4 м урт · ISO 15874",
+    badge: "PN20 · S2.5",
+    badgeType: "hw",
+    image: "assets/pipes-blue.jpg",
+    items: [
+      { code:"PPR-HW/S2.5/20×3.4",   size:"Ø20 × 3.4 мм · 4 м",   sclass:"S2.5", pn:"PN20", price:"3,500" },
+      { code:"PPR-HW/S2.5/25×4.2",   size:"Ø25 × 4.2 мм · 4 м",   sclass:"S2.5", pn:"PN20", price:"5,100" },
+      { code:"PPR-HW/S2.5/32×5.4",   size:"Ø32 × 5.4 мм · 4 м",   sclass:"S2.5", pn:"PN20", price:"8,500" },
+      { code:"PPR-HW/S2.5/40×6.7",   size:"Ø40 × 6.7 мм · 4 м",   sclass:"S2.5", pn:"PN20", price:"13,000" },
+      { code:"PPR-HW/S2.5/50×8.3",   size:"Ø50 × 8.3 мм · 4 м",   sclass:"S2.5", pn:"PN20", price:"19,000" },
+      { code:"PPR-HW/S2.5/63×10.5",  size:"Ø63 × 10.5 мм · 4 м",  sclass:"S2.5", pn:"PN20", price:"30,000" },
+      { code:"PPR-HW/S2.5/75×12.5",  size:"Ø75 × 12.5 мм · 4 м",  sclass:"S2.5", pn:"PN20", price:"44,000" },
+      { code:"PPR-HW/S2.5/90×15",    size:"Ø90 × 15 мм · 4 м",    sclass:"S2.5", pn:"PN20", price:"63,000" },
+      { code:"PPR-HW/S2.5/110×18.3", size:"Ø110 × 18.3 мм · 4 м", sclass:"S2.5", pn:"PN20", price:"94,000" }
+    ]
+  }
+];
 
 let LIVE_PRODUCTS = JSON.parse(JSON.stringify(DEFAULT_PRODUCTS));
 
 /* ==========================================================
-   TABLE RENDERING
+   PRODUCT CARD RENDERING  (dynamic, from LIVE_PRODUCTS)
    ========================================================== */
+const TABLE_SVG = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="4" rx="1"/><rect x="3" y="9" width="18" height="4" rx="1"/><rect x="3" y="15" width="18" height="4" rx="1"/></svg>`;
+const ARR_SVG   = `<svg class="arr" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>`;
+
+function renderProductCards(){
+  const container = document.getElementById("prod-cards-container");
+  if(!container) return;
+  container.innerHTML = LIVE_PRODUCTS.map((p, i) => `
+    <div class="prod-card reveal" data-tilt${i > 0 ? ` data-delay="${(i*0.12).toFixed(2)}s"` : ""}>
+      <div class="shine"></div>
+      <div class="prod-card-img">
+        <img src="${p.image}" alt="${p.name}" onerror="this.style.opacity='.3'"/>
+        <div class="prod-card-badge ${p.badgeType||'cw'}"><span class="bdot"></span>${p.badge}</div>
+      </div>
+      <div class="prod-card-body">
+        <div class="prod-card-title">${p.name}</div>
+        <div class="prod-card-desc">${p.desc}</div>
+        <button class="prod-card-btn" id="btn-${p.key}" onclick="toggleTable('${p.key}')" data-cursor>
+          ${TABLE_SVG}Үнийн хүснэгт${ARR_SVG}
+        </button>
+      </div>
+      <div class="price-table-wrap" id="table-${p.key}">
+        <div class="price-table-inner">
+          <div class="price-table-hdr">
+            <div class="price-table-hdr-t">${p.name} — Үнийн жагсаалт</div>
+          </div>
+          <table class="price-table">
+            <thead><tr>
+              <th>№</th><th>Барааны код</th><th>Хэмжээ</th>
+              <th>S класс</th><th>PN</th><th>Нэгж үнэ (₮)</th>
+            </tr></thead>
+            <tbody id="tbody-${p.key}"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>`).join("");
+  rebindCards();
+  observeReveal();
+}
+
 function renderTable(key){
   const tbody = document.getElementById("tbody-"+key);
   if(!tbody) return;
-  const rows = LIVE_PRODUCTS[key] || [];
+  const prod = LIVE_PRODUCTS.find(p => p.key === key);
+  const rows = prod ? (prod.items || []) : [];
   tbody.innerHTML = rows.map((r,i) => `
     <tr>
       <td>${i+1}</td>
@@ -1589,10 +1575,9 @@ function toggleTable(key){
   const btn  = document.getElementById("btn-"+key);
   if(!wrap || !btn) return;
   const isOpen = wrap.classList.contains("open");
-  // Close all tables first
-  ["cw","hw"].forEach(k => {
-    const w = document.getElementById("table-"+k);
-    const b = document.getElementById("btn-"+k);
+  LIVE_PRODUCTS.forEach(p => {
+    const w = document.getElementById("table-"+p.key);
+    const b = document.getElementById("btn-"+p.key);
     if(w) w.classList.remove("open");
     if(b) b.classList.remove("open");
   });
@@ -1608,10 +1593,11 @@ function toggleTable(key){
    FIREBASE LIVE LOADER
    ========================================================== */
 function tryLoadFirebase(){
-  if(FB_CONFIG.apiKey === "YOUR_API_KEY") return; // not configured yet
+  renderProductCards(); // show defaults immediately
+  if(FB_CONFIG.apiKey === "YOUR_API_KEY") return;
   function loadScript(src, cb){
     const s = document.createElement("script");
-    s.src = src; s.onload = cb; s.onerror = () => console.warn("Firebase SDK failed to load");
+    s.src = src; s.onload = cb; s.onerror = () => console.warn("Firebase SDK load failed");
     document.head.appendChild(s);
   }
   const base = "https://www.gstatic.com/firebasejs/9.23.0/";
@@ -1621,13 +1607,30 @@ function tryLoadFirebase(){
         if(!firebase.apps.length) firebase.initializeApp(FB_CONFIG);
         firebase.database().ref("products").on("value", snap => {
           const data = snap.val();
-          if(!data) return;
-          if(data.cw) LIVE_PRODUCTS.cw = Array.isArray(data.cw) ? data.cw : Object.values(data.cw);
-          if(data.hw) LIVE_PRODUCTS.hw = Array.isArray(data.hw) ? data.hw : Object.values(data.hw);
-          // Re-render any open table
-          ["cw","hw"].forEach(k => {
-            const w = document.getElementById("table-"+k);
-            if(w && w.classList.contains("open")) renderTable(k);
+          if(data && typeof data === "object"){
+            const arr = Object.entries(data).map(([key, val]) => {
+              if(val && typeof val === "object" && val.name){
+                // New format: {name, desc, badge, badgeType, image, items}
+                return {
+                  key,
+                  name:      val.name      || key,
+                  desc:      val.desc      || "",
+                  badge:     val.badge     || "",
+                  badgeType: val.badgeType || "cw",
+                  image:     val.image     || "",
+                  items:     Array.isArray(val.items) ? val.items : Object.values(val.items || {})
+                };
+              }
+              // Legacy format: val is array of items
+              const def = DEFAULT_PRODUCTS.find(p => p.key === key) || DEFAULT_PRODUCTS[0];
+              return { ...def, key, items: Array.isArray(val) ? val : Object.values(val||{}) };
+            }).filter(Boolean);
+            if(arr.length) LIVE_PRODUCTS = arr;
+          }
+          renderProductCards();
+          LIVE_PRODUCTS.forEach(p => {
+            const w = document.getElementById("table-"+p.key);
+            if(w && w.classList.contains("open")) renderTable(p.key);
           });
         });
       }catch(e){ console.warn("Firebase init error:", e); }

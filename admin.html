@@ -55,10 +55,7 @@ body{
   letter-spacing:.04em;
 }
 .login-btn:hover{background:#0D2F7A;}
-.login-err{
-  color:#CC1E1E;font-size:13px;margin-top:10px;
-  display:none;
-}
+.login-err{color:#CC1E1E;font-size:13px;margin-top:10px;display:none;}
 
 /* ===== ADMIN APP ===== */
 #admin-app{display:none;min-height:100vh;}
@@ -104,7 +101,84 @@ body{
 .page-title{font-size:28px;font-weight:800;color:#082260;letter-spacing:-.02em;margin-bottom:6px;}
 .page-sub{font-size:14px;color:#6B87A8;margin-bottom:36px;}
 
-/* Section card */
+/* ===== ADD PRODUCT CARD ===== */
+.add-prod-card{
+  background:#fff;border-radius:14px;
+  border:2px dashed #c5d3ea;
+  box-shadow:0 2px 8px rgba(8,34,96,.04);
+  margin-bottom:32px;
+  overflow:hidden;
+  transition:border-color .2s;
+}
+.add-prod-card:hover{border-color:#082260;}
+.add-prod-header{
+  display:flex;align-items:center;gap:12px;
+  padding:18px 28px;cursor:pointer;
+  user-select:none;
+}
+.add-prod-title{
+  display:flex;align-items:center;gap:10px;
+  font-size:15px;font-weight:700;color:#082260;
+}
+.add-prod-title-icon{
+  width:32px;height:32px;border-radius:8px;
+  background:linear-gradient(135deg,#082260,#1A5CC8);
+  display:inline-flex;align-items:center;justify-content:center;
+  flex-shrink:0;
+}
+.add-prod-chevron{color:#6B87A8;transition:transform .25s;flex-shrink:0;margin-left:auto;}
+.add-prod-chevron.open{transform:rotate(180deg);}
+.add-prod-body{padding:0 28px 28px;display:none;}
+.add-prod-body.open{display:block;}
+.add-prod-form{display:flex;gap:24px;flex-wrap:wrap;}
+
+/* New product image upload area */
+.new-prod-img-wrap{flex-shrink:0;}
+.new-prod-img-area{
+  width:140px;height:140px;border-radius:12px;
+  border:2px dashed #c5d3ea;background:#f5f8ff;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  cursor:pointer;transition:all .2s;overflow:hidden;position:relative;
+}
+.new-prod-img-area:hover{border-color:#082260;background:#eef2ff;}
+.new-prod-img-area img{
+  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+}
+.new-prod-img-area .img-placeholder{
+  display:flex;flex-direction:column;align-items:center;gap:8px;
+  color:#6B87A8;pointer-events:none;
+}
+.new-prod-img-area .img-placeholder span{font-size:11px;font-weight:600;letter-spacing:.04em;}
+
+/* Add product fields */
+.add-prod-fields{flex:1;min-width:240px;display:flex;flex-direction:column;gap:14px;}
+.field-group{display:flex;flex-direction:column;gap:5px;}
+.field-group label{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#6B87A8;}
+.field-input{
+  border:1.5px solid #dde5f2;border-radius:8px;
+  padding:10px 14px;font-size:14px;font-family:inherit;
+  color:#1a2540;outline:none;transition:border-color .2s;background:#fff;
+  width:100%;
+}
+.field-input:focus{border-color:#0D2F7A;}
+.field-row{display:flex;gap:12px;}
+.field-row .field-group{flex:1;}
+.field-select{
+  border:1.5px solid #dde5f2;border-radius:8px;
+  padding:10px 14px;font-size:13px;font-family:inherit;font-weight:600;
+  color:#1a2540;outline:none;background:#fff;cursor:pointer;width:100%;
+}
+.field-select:focus{border-color:#0D2F7A;}
+.add-prod-submit-btn{
+  display:inline-flex;align-items:center;gap:8px;
+  background:#082260;color:#fff;border:none;border-radius:8px;
+  padding:12px 24px;font-size:13px;font-weight:700;letter-spacing:.06em;
+  cursor:pointer;font-family:inherit;transition:background .2s;
+  align-self:flex-start;
+}
+.add-prod-submit-btn:hover{background:#0D2F7A;}
+
+/* ===== SECTION CARD ===== */
 .section-card{
   background:#fff;border-radius:14px;
   border:1px solid #dde5f2;
@@ -114,26 +188,70 @@ body{
 }
 .section-head{
   display:flex;align-items:center;gap:14px;
-  padding:20px 28px;
+  padding:16px 28px;
   border-bottom:2px solid #eef2fb;
   background:linear-gradient(90deg,#f5f8ff,#fff);
+  flex-wrap:wrap;
 }
-.section-head-badge{
-  display:inline-flex;align-items:center;gap:6px;
-  padding:5px 12px;border-radius:999px;
-  font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#fff;
+
+/* Product image thumbnail */
+.prod-img-thumb{
+  width:72px;height:72px;border-radius:10px;
+  overflow:hidden;cursor:pointer;
+  position:relative;flex-shrink:0;
+  background:#f0f4fb;
+  border:2px solid #dde5f2;
+  transition:border-color .2s;
 }
-.section-head-badge.cw{background:#082260;}
-.section-head-badge.hw{background:#CC1E1E;}
-.section-head-t{font-size:17px;font-weight:700;color:#082260;}
+.prod-img-thumb:hover{border-color:#082260;}
+.prod-img-thumb img{width:100%;height:100%;object-fit:cover;display:block;}
+.prod-img-thumb .img-overlay{
+  position:absolute;inset:0;
+  background:rgba(8,34,96,.55);
+  display:flex;align-items:center;justify-content:center;
+  opacity:0;transition:opacity .2s;
+}
+.prod-img-thumb:hover .img-overlay{opacity:1;}
+
+/* Meta inputs */
+.section-meta{display:flex;flex-direction:column;gap:5px;flex:1;min-width:200px;}
+.meta-input{
+  border:1.5px solid transparent;border-radius:6px;
+  padding:5px 8px;font-family:inherit;
+  background:transparent;transition:all .2s;
+  outline:none;width:100%;
+}
+.meta-input:hover{background:#f5f8ff;border-color:#dde5f2;}
+.meta-input:focus{background:#fff;border-color:#0D2F7A;}
+.meta-name-input{font-size:16px;font-weight:700;color:#082260;}
+.meta-desc-input{font-size:12px;color:#6B87A8;}
+.meta-badge-row{display:flex;gap:6px;align-items:center;}
+.meta-badge-input{font-size:12px;flex:1;}
+.meta-badge-type-select{
+  border:1.5px solid #dde5f2;border-radius:6px;
+  padding:4px 8px;font-family:inherit;font-size:11px;font-weight:600;
+  color:#6B87A8;background:#f5f8ff;cursor:pointer;outline:none;white-space:nowrap;
+}
+.meta-badge-type-select:focus{border-color:#0D2F7A;}
+
 .section-head-spacer{flex:1;}
+.section-head-actions{display:flex;gap:8px;align-items:center;flex-wrap:wrap;}
+
 .add-row-btn{
   display:inline-flex;align-items:center;gap:6px;
   background:#082260;color:#fff;border:none;border-radius:7px;
   padding:9px 16px;font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
-  cursor:pointer;font-family:inherit;transition:background .2s;
+  cursor:pointer;font-family:inherit;transition:background .2s;white-space:nowrap;
 }
 .add-row-btn:hover{background:#0D2F7A;}
+
+.del-prod-btn{
+  display:inline-flex;align-items:center;gap:6px;
+  background:#fce8e8;color:#CC1E1E;border:none;border-radius:7px;
+  padding:9px 14px;font-size:12px;font-weight:700;letter-spacing:.04em;
+  cursor:pointer;font-family:inherit;transition:all .2s;white-space:nowrap;
+}
+.del-prod-btn:hover{background:#CC1E1E;color:#fff;}
 
 /* Table */
 .section-body{padding:0 28px 24px;overflow-x:auto;}
@@ -152,8 +270,6 @@ body{
 .admin-table tbody tr:last-child{border-bottom:none;}
 .admin-table tbody td{padding:8px 12px;vertical-align:middle;}
 .admin-table .row-num{font-size:11px;color:#9aa8bf;font-weight:600;}
-
-/* Inputs */
 .admin-table input{
   width:100%;border:1.5px solid #e5eaf5;border-radius:6px;
   padding:8px 10px;font-size:13px;font-family:inherit;color:#1a2540;
@@ -165,7 +281,6 @@ body{
 .col-class{min-width:70px;}
 .col-pn{min-width:80px;}
 .col-price{min-width:120px;}
-
 .del-btn{
   width:32px;height:32px;border-radius:6px;border:none;cursor:pointer;
   background:#fce8e8;color:#CC1E1E;
@@ -174,7 +289,7 @@ body{
 }
 .del-btn:hover{background:#CC1E1E;color:#fff;}
 
-/* Save button */
+/* Save / footer */
 .section-footer{
   padding:16px 28px 20px;
   border-top:1px solid #f0f4fb;
@@ -190,6 +305,23 @@ body{
 .save-btn.saving{opacity:.7;pointer-events:none;}
 .save-label{font-size:13px;color:#6B87A8;}
 
+/* Loading / empty states */
+.loading-state{
+  display:flex;align-items:center;justify-content:center;gap:12px;
+  padding:60px 28px;color:#6B87A8;font-size:14px;
+}
+@keyframes spin{to{transform:rotate(360deg);}}
+.spinner{
+  width:24px;height:24px;border:2.5px solid #dde5f2;
+  border-top-color:#082260;border-radius:50%;
+  animation:spin .8s linear infinite;
+}
+.empty-state{
+  text-align:center;padding:48px 28px;color:#9aa8bf;font-size:14px;
+  background:#fff;border-radius:14px;border:1px solid #dde5f2;
+}
+.empty-state svg{margin:0 auto 12px;display:block;color:#c5d3ea;}
+
 /* Toast */
 #toast{
   position:fixed;bottom:28px;right:28px;z-index:999;
@@ -201,6 +333,7 @@ body{
   transform:translateY(80px);opacity:0;
   transition:transform .3s cubic-bezier(.23,1,.32,1),opacity .3s ease;
   pointer-events:none;
+  max-width:calc(100vw - 56px);
 }
 #toast.show{transform:translateY(0);opacity:1;}
 #toast.error{background:#CC1E1E;}
@@ -216,7 +349,7 @@ body{
       <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
     </div>
     <div class="login-title">Амирбаяр — Нэвтрэх</div>
-    <div class="login-sub">Үнийн мэдээлэл засах панел</div>
+    <div class="login-sub">Бүтээгдэхүүн болон үнийн мэдээлэл засах панел</div>
     <input type="password" class="login-field" id="pwField" placeholder="Нууц үг" autocomplete="current-password"/>
     <button class="login-btn" onclick="doLogin()">Нэвтрэх</button>
     <div class="login-err" id="loginErr">Нууц үг буруу байна.</div>
@@ -236,81 +369,85 @@ body{
     <button class="topbar-logout" onclick="doLogout()">Гарах</button>
   </header>
 
-  <!-- Firebase not-configured banner -->
   <div class="fb-banner" id="fbBanner" style="display:none;">
     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-    Firebase тохиргоо хийгдээгүй байна. <a href="https://console.firebase.google.com" target="_blank" rel="noopener">Firebase Console</a>-оос шинэ project үүсгэж, <code>Amirbayar.html</code> болон <code>admin.html</code> дахь <code>FB_CONFIG</code>-г тохируулна уу.
+    Firebase тохиргоо хийгдээгүй байна. <a href="https://console.firebase.google.com" target="_blank" rel="noopener">Firebase Console</a>-оос тохируулна уу.
   </div>
 
   <div class="page">
-    <div class="page-title">Үнийн мэдээлэл засах</div>
+    <div class="page-title">Бүтээгдэхүүн &amp; Үнийн мэдээлэл</div>
     <div class="page-sub" id="pageSubText">Firebase холбогдсон — хадгалсан өөрчлөлт шууд сайт дээр тусна.</div>
 
-    <!-- CW TABLE -->
-    <div class="section-card">
-      <div class="section-head">
-        <span class="section-head-badge cw">CW · PN12.5</span>
-        <div class="section-head-t">Хүйтэн усны хоолой</div>
-        <div class="section-head-spacer"></div>
-        <button class="add-row-btn" onclick="addRow('cw')">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-          Мөр нэмэх
-        </button>
+    <!-- ===== ADD NEW PRODUCT ===== -->
+    <div class="add-prod-card">
+      <div class="add-prod-header" onclick="toggleAddProd()">
+        <div class="add-prod-title">
+          <div class="add-prod-title-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </div>
+          Шинэ бүтээгдэхүүн нэмэх
+        </div>
+        <svg class="add-prod-chevron" id="add-prod-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
       </div>
-      <div class="section-body">
-        <table class="admin-table" id="tbl-cw">
-          <thead><tr>
-            <th>№</th>
-            <th class="col-code">Барааны код</th>
-            <th class="col-size">Хэмжээ</th>
-            <th class="col-class">S класс</th>
-            <th class="col-pn">PN</th>
-            <th class="col-price">Нэгж үнэ (₮)</th>
-            <th></th>
-          </tr></thead>
-          <tbody id="tbody-admin-cw"></tbody>
-        </table>
-      </div>
-      <div class="section-footer">
-        <span class="save-label" id="lbl-cw"></span>
-        <button class="save-btn" id="sbtn-cw" onclick="saveSection('cw')">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
-          Хадгалах
-        </button>
+      <div class="add-prod-body" id="add-prod-body">
+        <div class="add-prod-form">
+
+          <!-- Image upload -->
+          <div class="new-prod-img-wrap">
+            <div class="new-prod-img-area" id="new-prod-img-area"
+                 onclick="document.getElementById('new-prod-img-input').click()"
+                 title="Зураг оруулах">
+              <img id="new-prod-img-preview" src="" style="display:none" onerror="this.style.display='none'"/>
+              <div class="img-placeholder" id="new-prod-img-placeholder">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+                  <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
+                  <circle cx="12" cy="13" r="4"/>
+                </svg>
+                <span>Зураг оруулах</span>
+              </div>
+            </div>
+            <input type="file" id="new-prod-img-input" accept="image/*" style="display:none" onchange="handleNewProdImage(this)"/>
+            <div style="margin-top:6px;font-size:11px;color:#9aa8bf;text-align:center;">JPEG/PNG · 500KB хүртэл</div>
+          </div>
+
+          <!-- Fields -->
+          <div class="add-prod-fields">
+            <div class="field-group">
+              <label>Бүтээгдэхүүний нэр *</label>
+              <input type="text" class="field-input" id="new-prod-name" placeholder="Жишээ: Хүйтэн усны хоолой"/>
+            </div>
+            <div class="field-group">
+              <label>Тайлбар</label>
+              <input type="text" class="field-input" id="new-prod-desc" placeholder="Жишээ: Cold Water Pipe · Ø16–160 мм · 4 м урт"/>
+            </div>
+            <div class="field-row">
+              <div class="field-group">
+                <label>Badge текст</label>
+                <input type="text" class="field-input" id="new-prod-badge" placeholder="PN12.5 · S4"/>
+              </div>
+              <div class="field-group" style="flex:0 0 auto;min-width:140px;">
+                <label>Badge өнгө</label>
+                <select class="field-select" id="new-prod-badge-type">
+                  <option value="cw">Navy (цэнхэр)</option>
+                  <option value="hw">Red (улаан)</option>
+                </select>
+              </div>
+            </div>
+            <button class="add-prod-submit-btn" onclick="submitNewProduct()">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              Бүтээгдэхүүн нэмэх
+            </button>
+          </div>
+
+        </div>
       </div>
     </div>
 
-    <!-- HW TABLE -->
-    <div class="section-card">
-      <div class="section-head">
-        <span class="section-head-badge hw">HW · PN20</span>
-        <div class="section-head-t">Халуун усны хоолой</div>
-        <div class="section-head-spacer"></div>
-        <button class="add-row-btn" onclick="addRow('hw')">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-          Мөр нэмэх
-        </button>
-      </div>
-      <div class="section-body">
-        <table class="admin-table" id="tbl-hw">
-          <thead><tr>
-            <th>№</th>
-            <th class="col-code">Барааны код</th>
-            <th class="col-size">Хэмжээ</th>
-            <th class="col-class">S класс</th>
-            <th class="col-pn">PN</th>
-            <th class="col-price">Нэгж үнэ (₮)</th>
-            <th></th>
-          </tr></thead>
-          <tbody id="tbody-admin-hw"></tbody>
-        </table>
-      </div>
-      <div class="section-footer">
-        <span class="save-label" id="lbl-hw"></span>
-        <button class="save-btn" id="sbtn-hw" onclick="saveSection('hw')">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
-          Хадгалах
-        </button>
+    <!-- ===== DYNAMIC PRODUCT SECTIONS ===== -->
+    <div id="product-sections">
+      <div class="loading-state" id="loading-state">
+        <div class="spinner"></div>
+        <span>Мэдээлэл ачаалж байна…</span>
       </div>
     </div>
 
@@ -327,7 +464,7 @@ body{
 /* ============================================================
    CONFIGURATION — MUST MATCH Amirbayar.html
    ============================================================ */
-const ADMIN_PASSWORD = "amirbayar2024";   // change this to your own password
+const ADMIN_PASSWORD = "amirbayar2024";
 
 const FB_CONFIG = {
   apiKey:            "AIzaSyDcHj77_6L40LiVPa33mnP6wmJA13xPqGY",
@@ -340,37 +477,57 @@ const FB_CONFIG = {
 };
 
 /* ============================================================
-   DEFAULT DATA  (used when Firebase not configured)
+   DEFAULT DATA
    ============================================================ */
-const DEFAULT_PRODUCTS = {
-  cw: [
-    { code:"PPR-CW/S4/16×2.2",   size:"Ø16 × 2.2 мм · 4 м",   sclass:"S4", pn:"PN12.5", price:"1,800" },
-    { code:"PPR-CW/S4/20×2.5",   size:"Ø20 × 2.5 мм · 4 м",   sclass:"S4", pn:"PN12.5", price:"2,800" },
-    { code:"PPR-CW/S4/25×3.5",   size:"Ø25 × 3.5 мм · 4 м",   sclass:"S4", pn:"PN12.5", price:"4,000" },
-    { code:"PPR-CW/S4/32×4.4",   size:"Ø32 × 4.4 мм · 4 м",   sclass:"S4", pn:"PN12.5", price:"7,000" },
-    { code:"PPR-CW/S4/40×5.5",   size:"Ø40 × 5.5 мм · 4 м",   sclass:"S4", pn:"PN12.5", price:"10,000" },
-    { code:"PPR-CW/S4/50×6.9",   size:"Ø50 × 6.9 мм · 4 м",   sclass:"S4", pn:"PN12.5", price:"15,000" },
-    { code:"PPR-CW/S4/63×8.6",   size:"Ø63 × 8.6 мм · 4 м",   sclass:"S4", pn:"PN12.5", price:"22,000" },
-    { code:"PPR-CW/S4/75×10.3",  size:"Ø75 × 10.3 мм · 4 м",  sclass:"S4", pn:"PN12.5", price:"32,000" },
-    { code:"PPR-CW/S4/90×12.3",  size:"Ø90 × 12.3 мм · 4 м",  sclass:"S4", pn:"PN12.5", price:"46,000" },
-    { code:"PPR-CW/S4/110×15",   size:"Ø110 × 15 мм · 4 м",   sclass:"S4", pn:"PN12.5", price:"68,000" },
-    { code:"PPR-CW/S4/160×21.9", size:"Ø160 × 21.9 мм · 4 м", sclass:"S4", pn:"PN12.5", price:"145,000" }
-  ],
-  hw: [
-    { code:"PPR-HW/S2.5/20×3.4",   size:"Ø20 × 3.4 мм · 4 м",   sclass:"S2.5", pn:"PN20", price:"3,500" },
-    { code:"PPR-HW/S2.5/25×4.2",   size:"Ø25 × 4.2 мм · 4 м",   sclass:"S2.5", pn:"PN20", price:"5,100" },
-    { code:"PPR-HW/S2.5/32×5.4",   size:"Ø32 × 5.4 мм · 4 м",   sclass:"S2.5", pn:"PN20", price:"8,500" },
-    { code:"PPR-HW/S2.5/40×6.7",   size:"Ø40 × 6.7 мм · 4 м",   sclass:"S2.5", pn:"PN20", price:"13,000" },
-    { code:"PPR-HW/S2.5/50×8.3",   size:"Ø50 × 8.3 мм · 4 м",   sclass:"S2.5", pn:"PN20", price:"19,000" },
-    { code:"PPR-HW/S2.5/63×10.5",  size:"Ø63 × 10.5 мм · 4 м",  sclass:"S2.5", pn:"PN20", price:"30,000" },
-    { code:"PPR-HW/S2.5/75×12.5",  size:"Ø75 × 12.5 мм · 4 м",  sclass:"S2.5", pn:"PN20", price:"44,000" },
-    { code:"PPR-HW/S2.5/90×15",    size:"Ø90 × 15 мм · 4 м",    sclass:"S2.5", pn:"PN20", price:"63,000" },
-    { code:"PPR-HW/S2.5/110×18.3", size:"Ø110 × 18.3 мм · 4 м", sclass:"S2.5", pn:"PN20", price:"94,000" }
-  ]
-};
+const DEFAULT_PRODUCTS = [
+  {
+    key: "cw",
+    name: "Хүйтэн усны хоолой",
+    desc: "Cold Water Pipe · Ø16–160 мм · 4 м урт · ISO 15874",
+    badge: "PN12.5 · S4",
+    badgeType: "cw",
+    image: "assets/pipes-cw.jpg",
+    items: [
+      { code:"PPR-CW/S4/16×2.2",   size:"Ø16 × 2.2 мм · 4 м",   sclass:"S4", pn:"PN12.5", price:"1,800" },
+      { code:"PPR-CW/S4/20×2.5",   size:"Ø20 × 2.5 мм · 4 м",   sclass:"S4", pn:"PN12.5", price:"2,800" },
+      { code:"PPR-CW/S4/25×3.5",   size:"Ø25 × 3.5 мм · 4 м",   sclass:"S4", pn:"PN12.5", price:"4,000" },
+      { code:"PPR-CW/S4/32×4.4",   size:"Ø32 × 4.4 мм · 4 м",   sclass:"S4", pn:"PN12.5", price:"7,000" },
+      { code:"PPR-CW/S4/40×5.5",   size:"Ø40 × 5.5 мм · 4 м",   sclass:"S4", pn:"PN12.5", price:"10,000" },
+      { code:"PPR-CW/S4/50×6.9",   size:"Ø50 × 6.9 мм · 4 м",   sclass:"S4", pn:"PN12.5", price:"15,000" },
+      { code:"PPR-CW/S4/63×8.6",   size:"Ø63 × 8.6 мм · 4 м",   sclass:"S4", pn:"PN12.5", price:"22,000" },
+      { code:"PPR-CW/S4/75×10.3",  size:"Ø75 × 10.3 мм · 4 м",  sclass:"S4", pn:"PN12.5", price:"32,000" },
+      { code:"PPR-CW/S4/90×12.3",  size:"Ø90 × 12.3 мм · 4 м",  sclass:"S4", pn:"PN12.5", price:"46,000" },
+      { code:"PPR-CW/S4/110×15",   size:"Ø110 × 15 мм · 4 м",   sclass:"S4", pn:"PN12.5", price:"68,000" },
+      { code:"PPR-CW/S4/160×21.9", size:"Ø160 × 21.9 мм · 4 м", sclass:"S4", pn:"PN12.5", price:"145,000" }
+    ]
+  },
+  {
+    key: "hw",
+    name: "Халуун усны хоолой",
+    desc: "Hot Water Pipe · Ø20–110 мм · 4 м урт · ISO 15874",
+    badge: "PN20 · S2.5",
+    badgeType: "hw",
+    image: "assets/pipes-blue.jpg",
+    items: [
+      { code:"PPR-HW/S2.5/20×3.4",   size:"Ø20 × 3.4 мм · 4 м",   sclass:"S2.5", pn:"PN20", price:"3,500" },
+      { code:"PPR-HW/S2.5/25×4.2",   size:"Ø25 × 4.2 мм · 4 м",   sclass:"S2.5", pn:"PN20", price:"5,100" },
+      { code:"PPR-HW/S2.5/32×5.4",   size:"Ø32 × 5.4 мм · 4 м",   sclass:"S2.5", pn:"PN20", price:"8,500" },
+      { code:"PPR-HW/S2.5/40×6.7",   size:"Ø40 × 6.7 мм · 4 м",   sclass:"S2.5", pn:"PN20", price:"13,000" },
+      { code:"PPR-HW/S2.5/50×8.3",   size:"Ø50 × 8.3 мм · 4 м",   sclass:"S2.5", pn:"PN20", price:"19,000" },
+      { code:"PPR-HW/S2.5/63×10.5",  size:"Ø63 × 10.5 мм · 4 м",  sclass:"S2.5", pn:"PN20", price:"30,000" },
+      { code:"PPR-HW/S2.5/75×12.5",  size:"Ø75 × 12.5 мм · 4 м",  sclass:"S2.5", pn:"PN20", price:"44,000" },
+      { code:"PPR-HW/S2.5/90×15",    size:"Ø90 × 15 мм · 4 м",    sclass:"S2.5", pn:"PN20", price:"63,000" },
+      { code:"PPR-HW/S2.5/110×18.3", size:"Ø110 × 18.3 мм · 4 м", sclass:"S2.5", pn:"PN20", price:"94,000" }
+    ]
+  }
+];
 
-let DB = null;  // Firebase database ref, set after init
-let localData = JSON.parse(JSON.stringify(DEFAULT_PRODUCTS));
+/* ============================================================
+   STATE
+   ============================================================ */
+let DB = null;
+const PROD_IMAGES = {};   // key → data URL or asset path
+let NEW_PROD_IMAGE = "";  // staging area for add-product form
 
 /* ============================================================
    LOGIN
@@ -401,80 +558,258 @@ function showApp(){
   initFirebase();
 }
 
-// Auto-login if session active
-try{
-  if(sessionStorage.getItem("ab_admin") === "1") showApp();
-}catch(e){}
+try{ if(sessionStorage.getItem("ab_admin") === "1") showApp(); }catch(e){}
 
 /* ============================================================
-   FIREBASE INIT
+   ADD-PRODUCT PANEL TOGGLE
    ============================================================ */
-function initFirebase(){
-  const isPlaceholder = FB_CONFIG.apiKey === "YOUR_API_KEY";
-  if(isPlaceholder){
-    document.getElementById("fbBanner").style.display = "flex";
-    document.getElementById("pageSubText").textContent =
-      "Firebase тохиргоо хийгдээгүй — доорх мэдээлэл зөвхөн локалд хадгалагдана (сайт дээр тусахгүй).";
-    renderAdminTables(localData);
-    return;
-  }
-  function loadScript(src, cb){
-    const s = document.createElement("script");
-    s.src = src; s.onload = cb; s.onerror = () => {
-      showToast("Firebase SDK ачаалагдсангүй", true);
-      renderAdminTables(localData);
+function toggleAddProd(){
+  const body    = document.getElementById("add-prod-body");
+  const chevron = document.getElementById("add-prod-chevron");
+  body.classList.toggle("open");
+  chevron.classList.toggle("open");
+}
+
+/* ============================================================
+   IMAGE COMPRESSION
+   ============================================================ */
+function compressImage(file, callback){
+  const MAX_W = 800, QUALITY = 0.72;
+  const reader = new FileReader();
+  reader.onload = e => {
+    const img = new Image();
+    img.onload = () => {
+      const canvas = document.createElement("canvas");
+      let w = img.width, h = img.height;
+      if(w > MAX_W){ h = Math.round(h * MAX_W / w); w = MAX_W; }
+      canvas.width = w; canvas.height = h;
+      canvas.getContext("2d").drawImage(img, 0, 0, w, h);
+      callback(canvas.toDataURL("image/jpeg", QUALITY));
     };
-    document.head.appendChild(s);
-  }
-  const base = "https://www.gstatic.com/firebasejs/9.23.0/";
-  loadScript(base+"firebase-app-compat.js", () => {
-    loadScript(base+"firebase-database-compat.js", () => {
-      try{
-        if(!firebase.apps.length) firebase.initializeApp(FB_CONFIG);
-        DB = firebase.database();
-        DB.ref("products").once("value").then(snap => {
-          const data = snap.val();
-          if(data){
-            if(data.cw) localData.cw = Array.isArray(data.cw) ? data.cw : Object.values(data.cw);
-            if(data.hw) localData.hw = Array.isArray(data.hw) ? data.hw : Object.values(data.hw);
-          }
-          renderAdminTables(localData);
-        }).catch(() => renderAdminTables(localData));
-      }catch(e){
-        console.error("Firebase error:", e);
-        renderAdminTables(localData);
-      }
-    });
+    img.src = e.target.result;
+  };
+  reader.readAsDataURL(file);
+}
+
+function handleNewProdImage(input){
+  const file = input.files[0];
+  if(!file) return;
+  compressImage(file, dataUrl => {
+    NEW_PROD_IMAGE = dataUrl;
+    const preview     = document.getElementById("new-prod-img-preview");
+    const placeholder = document.getElementById("new-prod-img-placeholder");
+    preview.src = dataUrl;
+    preview.style.display = "block";
+    placeholder.style.display = "none";
+  });
+}
+
+function handleProdImageChange(input, key){
+  const file = input.files[0];
+  if(!file) return;
+  compressImage(file, dataUrl => {
+    PROD_IMAGES[key] = dataUrl;
+    const preview = document.getElementById("img-preview-"+key);
+    if(preview){ preview.src = dataUrl; preview.style.opacity = "1"; }
+    showToast("Зураг солигдлаа — Хадгалах дарна уу");
   });
 }
 
 /* ============================================================
-   TABLE RENDERING
+   SUBMIT NEW PRODUCT
    ============================================================ */
+function submitNewProduct(){
+  const name = document.getElementById("new-prod-name").value.trim();
+  if(!name){ showToast("Бүтээгдэхүүний нэр оруулна уу", true); return; }
+
+  const desc      = document.getElementById("new-prod-desc").value.trim();
+  const badge     = document.getElementById("new-prod-badge").value.trim();
+  const badgeType = document.getElementById("new-prod-badge-type").value;
+  const key       = "prod_" + Date.now().toString(36);
+
+  PROD_IMAGES[key] = NEW_PROD_IMAGE;
+
+  // Remove loading/empty placeholders
+  ["loading-state","empty-state"].forEach(id => {
+    const el = document.getElementById(id);
+    if(el) el.remove();
+  });
+
+  appendSection({ key, name, desc, badge, badgeType, image: NEW_PROD_IMAGE, items: [] });
+
+  // Reset form
+  document.getElementById("new-prod-name").value  = "";
+  document.getElementById("new-prod-desc").value  = "";
+  document.getElementById("new-prod-badge").value = "";
+  document.getElementById("new-prod-badge-type").value = "cw";
+  const preview = document.getElementById("new-prod-img-preview");
+  preview.src = ""; preview.style.display = "none";
+  document.getElementById("new-prod-img-placeholder").style.display = "flex";
+  document.getElementById("new-prod-img-input").value = "";
+  NEW_PROD_IMAGE = "";
+
+  // Collapse panel
+  document.getElementById("add-prod-body").classList.remove("open");
+  document.getElementById("add-prod-chevron").classList.remove("open");
+
+  showToast("Бүтээгдэхүүн нэмэгдлээ — Хадгалах дарна уу");
+}
+
+/* ============================================================
+   SECTION RENDERING
+   ============================================================ */
+function esc(s){
+  return String(s||"")
+    .replace(/&/g,"&amp;")
+    .replace(/"/g,"&quot;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;");
+}
+
 function rowHTML(r, i, key){
-  return `<tr id="row-${key}-${i}">
+  return `<tr>
     <td class="row-num">${i+1}</td>
-    <td><input class="col-code" value="${esc(r.code)}" placeholder="Барааны код"/></td>
-    <td><input class="col-size" value="${esc(r.size)}" placeholder="Хэмжээ"/></td>
+    <td><input class="col-code"  value="${esc(r.code)}"   placeholder="Барааны код"/></td>
+    <td><input class="col-size"  value="${esc(r.size)}"   placeholder="Хэмжээ"/></td>
     <td><input class="col-class" value="${esc(r.sclass)}" placeholder="S4"/></td>
-    <td><input class="col-pn"   value="${esc(r.pn)}"    placeholder="PN12.5"/></td>
-    <td><input class="col-price" value="${esc(r.price)}" placeholder="0"/></td>
+    <td><input class="col-pn"    value="${esc(r.pn)}"     placeholder="PN12.5"/></td>
+    <td><input class="col-price" value="${esc(r.price)}"  placeholder="0"/></td>
     <td><button class="del-btn" title="Устгах" onclick="delRow(this,'${key}')">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+        <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+      </svg>
     </button></td>
   </tr>`;
 }
 
-function esc(s){ return String(s||"").replace(/"/g,"&quot;"); }
+function appendSection(prod){
+  const key = prod.key;
+  const img = PROD_IMAGES[key] !== undefined ? PROD_IMAGES[key] : (prod.image || "");
 
-function renderAdminTables(data){
-  ["cw","hw"].forEach(key => {
-    const tbody = document.getElementById("tbody-admin-"+key);
-    if(!tbody) return;
-    const rows = data[key] || [];
-    tbody.innerHTML = rows.map((r,i) => rowHTML(r, i, key)).join("");
-    updateRowNums(key);
+  const html = `
+  <div class="section-card" id="section-${key}">
+    <div class="section-head">
+
+      <!-- Image thumbnail (click to change) -->
+      <div class="prod-img-thumb"
+           onclick="document.getElementById('img-input-${key}').click()"
+           title="Зураг солих">
+        <img src="${img}" alt="" id="img-preview-${key}"
+             onerror="this.style.opacity='.2'"
+             ${img ? "" : 'style="opacity:.2"'}/>
+        <div class="img-overlay">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round">
+            <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
+            <circle cx="12" cy="13" r="4"/>
+          </svg>
+        </div>
+      </div>
+      <input type="file" id="img-input-${key}" accept="image/*" style="display:none"
+             onchange="handleProdImageChange(this,'${key}')"/>
+
+      <!-- Editable meta fields -->
+      <div class="section-meta">
+        <input class="meta-input meta-name-input"  id="meta-name-${key}"
+               value="${esc(prod.name)}"  placeholder="Бүтээгдэхүүний нэр"/>
+        <input class="meta-input meta-desc-input"  id="meta-desc-${key}"
+               value="${esc(prod.desc)}"  placeholder="Тайлбар"/>
+        <div class="meta-badge-row">
+          <input class="meta-input meta-badge-input" id="meta-badge-${key}"
+                 value="${esc(prod.badge)}" placeholder="Badge текст"/>
+          <select class="meta-badge-type-select" id="meta-badge-type-${key}">
+            <option value="cw"${prod.badgeType==="cw" ? " selected" : ""}>Navy</option>
+            <option value="hw"${prod.badgeType==="hw" ? " selected" : ""}>Red</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="section-head-spacer"></div>
+
+      <div class="section-head-actions">
+        <button class="add-row-btn" onclick="addRow('${key}')">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+            <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
+          </svg>
+          Мөр нэмэх
+        </button>
+        <button class="del-prod-btn" onclick="deleteProduct('${key}')">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+            <polyline points="3 6 5 6 21 6"/>
+            <path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/>
+            <path d="M10 11v6"/><path d="M14 11v6"/>
+            <path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/>
+          </svg>
+          Устгах
+        </button>
+      </div>
+    </div><!-- /section-head -->
+
+    <div class="section-body">
+      <table class="admin-table" id="tbl-${key}">
+        <thead><tr>
+          <th>№</th>
+          <th class="col-code">Барааны код</th>
+          <th class="col-size">Хэмжээ</th>
+          <th class="col-class">S класс</th>
+          <th class="col-pn">PN</th>
+          <th class="col-price">Нэгж үнэ (₮)</th>
+          <th></th>
+        </tr></thead>
+        <tbody id="tbody-admin-${key}">
+          ${(prod.items||[]).map((r,i) => rowHTML(r,i,key)).join("")}
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section-footer">
+      <span class="save-label" id="lbl-${key}"></span>
+      <button class="save-btn" id="sbtn-${key}" onclick="saveSection('${key}')">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/>
+          <polyline points="17 21 17 13 7 13 7 21"/>
+          <polyline points="7 3 7 8 15 8"/>
+        </svg>
+        Хадгалах
+      </button>
+    </div>
+  </div>`;
+
+  document.getElementById("product-sections").insertAdjacentHTML("beforeend", html);
+}
+
+function renderAllSections(products){
+  const container = document.getElementById("product-sections");
+  container.innerHTML = "";
+  if(!products || products.length === 0){
+    container.innerHTML = `<div class="empty-state" id="empty-state">
+      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+        <rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 3H8"/>
+      </svg>
+      <p>Бүтээгдэхүүн байхгүй байна.<br/>Дээрх "Шинэ бүтээгдэхүүн нэмэх" хэсгийг ашиглана уу.</p>
+    </div>`;
+    return;
+  }
+  products.forEach(prod => {
+    PROD_IMAGES[prod.key] = prod.image || "";
+    appendSection(prod);
   });
+}
+
+/* ============================================================
+   ADD / DELETE ROWS
+   ============================================================ */
+function addRow(key){
+  const tbody = document.getElementById("tbody-admin-"+key);
+  if(!tbody) return;
+  const i = tbody.rows.length;
+  tbody.insertAdjacentHTML("beforeend", rowHTML({ code:"", size:"", sclass:"", pn:"", price:"0" }, i, key));
+  updateRowNums(key);
+  tbody.lastElementChild.querySelector("input").focus();
+}
+
+function delRow(btn, key){
+  btn.closest("tr").remove();
+  updateRowNums(key);
 }
 
 function updateRowNums(key){
@@ -487,27 +822,26 @@ function updateRowNums(key){
 }
 
 /* ============================================================
-   ADD / DELETE ROWS
+   DELETE PRODUCT
    ============================================================ */
-function addRow(key){
-  const tbody = document.getElementById("tbody-admin-"+key);
-  if(!tbody) return;
-  const i = tbody.rows.length;
-  const defaults = key === "cw"
-    ? { code:"PPR-CW/S4/20×2.5", size:"Ø20 × 2.5 мм · 4 м", sclass:"S4",   pn:"PN12.5", price:"0" }
-    : { code:"PPR-HW/S2.5/20×3.4", size:"Ø20 × 3.4 мм · 4 м", sclass:"S2.5", pn:"PN20",   price:"0" };
-  tbody.insertAdjacentHTML("beforeend", rowHTML(defaults, i, key));
-  tbody.lastElementChild.querySelector("input").focus();
-  updateRowNums(key);
-}
+function deleteProduct(key){
+  const name = document.getElementById("meta-name-"+key)?.value || key;
+  if(!confirm(`"${name}" бүтээгдэхүүнийг устгах уу?\nЭнэ үйлдлийг буцаах боломжгүй.`)) return;
 
-function delRow(btn, key){
-  btn.closest("tr").remove();
-  updateRowNums(key);
+  document.getElementById("section-"+key)?.remove();
+  delete PROD_IMAGES[key];
+
+  if(DB){
+    DB.ref("products/"+key).remove()
+      .then(() => showToast(`"${name}" устгагдлаа`))
+      .catch(err => showToast("Устгахад алдаа: "+err.message, true));
+  } else {
+    showToast(`"${name}" устгагдлаа (локал)`);
+  }
 }
 
 /* ============================================================
-   SAVE
+   READ TABLE
    ============================================================ */
 function readTable(key){
   const tbody = document.getElementById("tbody-admin-"+key);
@@ -521,55 +855,152 @@ function readTable(key){
       pn:     inputs[3]?.value.trim() || "",
       price:  inputs[4]?.value.trim() || "0"
     };
-  }).filter(r => r.code);
+  }).filter(r => r.code || r.size);
 }
 
+/* ============================================================
+   SAVE SECTION  (writes full product object to Firebase)
+   ============================================================ */
 function saveSection(key){
-  const btn = document.getElementById("sbtn-"+key);
-  const lbl = document.getElementById("lbl-"+key);
-  const rows = readTable(key);
+  const btn  = document.getElementById("sbtn-"+key);
+  const lbl  = document.getElementById("lbl-"+key);
+
+  const name      = document.getElementById("meta-name-"+key)?.value.trim()      || "";
+  const desc      = document.getElementById("meta-desc-"+key)?.value.trim()      || "";
+  const badge     = document.getElementById("meta-badge-"+key)?.value.trim()     || "";
+  const badgeType = document.getElementById("meta-badge-type-"+key)?.value       || "cw";
+  const image     = PROD_IMAGES[key] || "";
+  const items     = readTable(key);
+
+  const productData = { name, desc, badge, badgeType, image, items };
 
   btn.classList.add("saving");
   lbl.textContent = "Хадгалж байна…";
 
   if(!DB){
-    // No Firebase — just keep in memory and show success
-    localData[key] = rows;
     setTimeout(() => {
       btn.classList.remove("saving");
-      lbl.textContent = `${rows.length} мөр хадгалагдлаа (локал)`;
-      showToast(`${key.toUpperCase()} хадгалагдлаа (Firebase тохиргоогүй)`);
+      lbl.textContent = `${items.length} мөр хадгалагдлаа (локал)`;
+      showToast(`${name||key} хадгалагдлаа (Firebase тохиргоогүй)`);
     }, 400);
     return;
   }
 
-  DB.ref("products/"+key).set(rows)
+  DB.ref("products/"+key).set(productData)
     .then(() => {
       btn.classList.remove("saving");
-      lbl.textContent = `${rows.length} мөр хадгалагдлаа ✓`;
-      showToast(`${key === "cw" ? "Хүйтэн" : "Халуун"} усны хоолой амжилттай хадгалагдлаа`);
+      lbl.textContent = `${items.length} мөр хадгалагдлаа ✓`;
+      showToast(`${name||key} амжилттай хадгалагдлаа`);
     })
     .catch(err => {
       btn.classList.remove("saving");
       lbl.textContent = "Алдаа гарлаа";
-      showToast("Хадгалахад алдаа гарлаа: "+err.message, true);
+      showToast("Хадгалахад алдаа: "+err.message, true);
     });
+}
+
+/* ============================================================
+   FIREBASE INIT
+   ============================================================ */
+function initFirebase(){
+  if(FB_CONFIG.apiKey === "YOUR_API_KEY"){
+    document.getElementById("fbBanner").style.display = "flex";
+    document.getElementById("pageSubText").textContent =
+      "Firebase тохиргоо хийгдээгүй — өөрчлөлт зөвхөн локалд хадгалагдана.";
+    renderAllSections(DEFAULT_PRODUCTS);
+    return;
+  }
+
+  function loadScript(src, cb){
+    const s = document.createElement("script");
+    s.src = src; s.onload = cb;
+    s.onerror = () => {
+      showToast("Firebase SDK ачаалагдсангүй", true);
+      renderAllSections(DEFAULT_PRODUCTS);
+    };
+    document.head.appendChild(s);
+  }
+
+  const base = "https://www.gstatic.com/firebasejs/9.23.0/";
+  loadScript(base+"firebase-app-compat.js", () => {
+    loadScript(base+"firebase-database-compat.js", () => {
+      try{
+        if(!firebase.apps.length) firebase.initializeApp(FB_CONFIG);
+        DB = firebase.database();
+        DB.ref("products").once("value").then(snap => {
+          const data = snap.val();
+          if(data && typeof data === "object"){
+            const prods = Object.entries(data).map(([key, val]) => {
+              if(val && typeof val === "object" && !Array.isArray(val) && val.name){
+                // New format: {name, desc, badge, badgeType, image, items}
+                let items = val.items;
+                if(items && !Array.isArray(items)) items = Object.values(items);
+                return {
+                  key,
+                  name:      val.name      || "",
+                  desc:      val.desc      || "",
+                  badge:     val.badge     || "",
+                  badgeType: val.badgeType || "cw",
+                  image:     val.image     || "",
+                  items:     items         || []
+                };
+              } else {
+                // Legacy format: items array stored directly
+                const def   = DEFAULT_PRODUCTS.find(p => p.key === key);
+                const items = Array.isArray(val)
+                  ? val
+                  : (val && typeof val === "object" ? Object.values(val) : []);
+                return {
+                  key,
+                  name:      def ? def.name      : key,
+                  desc:      def ? def.desc      : "",
+                  badge:     def ? def.badge     : "",
+                  badgeType: def ? def.badgeType : "cw",
+                  image:     def ? def.image     : "",
+                  items
+                };
+              }
+            });
+
+            // Sort: cw first, hw second, then rest
+            prods.sort((a, b) => {
+              const order = ["cw","hw"];
+              const ai = order.indexOf(a.key), bi = order.indexOf(b.key);
+              if(ai !== -1 && bi !== -1) return ai - bi;
+              if(ai !== -1) return -1;
+              if(bi !== -1) return 1;
+              return 0;
+            });
+
+            renderAllSections(prods);
+          } else {
+            renderAllSections(DEFAULT_PRODUCTS);
+          }
+        }).catch(err => {
+          console.error("Firebase read error:", err);
+          showToast("Firebase уншихад алдаа гарлаа", true);
+          renderAllSections(DEFAULT_PRODUCTS);
+        });
+      } catch(e){
+        console.error("Firebase init error:", e);
+        renderAllSections(DEFAULT_PRODUCTS);
+      }
+    });
+  });
 }
 
 /* ============================================================
    TOAST
    ============================================================ */
 function showToast(msg, isError=false){
-  const t = document.getElementById("toast");
-  const m = document.getElementById("toast-msg");
+  const t  = document.getElementById("toast");
+  const m  = document.getElementById("toast-msg");
   const ic = document.getElementById("toast-icon");
   m.textContent = msg;
   t.classList.toggle("error", isError);
-  if(isError){
-    ic.innerHTML = '<line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>';
-  } else {
-    ic.innerHTML = '<polyline points="20 6 9 17 4 12"/>';
-  }
+  ic.innerHTML = isError
+    ? '<line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>'
+    : '<polyline points="20 6 9 17 4 12"/>';
   t.classList.add("show");
   clearTimeout(t._timer);
   t._timer = setTimeout(() => t.classList.remove("show"), 3200);
