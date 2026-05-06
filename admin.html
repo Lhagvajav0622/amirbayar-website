@@ -4,96 +4,36 @@
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
 <title>Admin — Амирбаяр ХХК</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap&subset=cyrillic,latin" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap&subset=cyrillic,latin" rel="stylesheet"/>
 <style>
 *,*::before,*::after{box-sizing:border-box;}
 html,body{margin:0;padding:0;}
-body{
-  font-family:'Inter',system-ui,sans-serif;
-  background:#f0f4fb;
-  color:#1a2540;
-  -webkit-font-smoothing:antialiased;
-  min-height:100vh;
-}
+body{font-family:'Inter',system-ui,sans-serif;background:#f0f4fb;color:#1a2540;-webkit-font-smoothing:antialiased;min-height:100vh;}
 
-/* ===== LOGIN GATE ===== */
-#login-gate{
-  min-height:100vh;
-  display:flex;align-items:center;justify-content:center;
-  background:linear-gradient(135deg,#082260 0%,#0D2F7A 50%,#082260 100%);
-}
-.login-box{
-  background:#fff;border-radius:16px;
-  padding:48px 44px;
-  width:min(440px,92vw);
-  box-shadow:0 24px 64px rgba(8,34,96,.3);
-  text-align:center;
-}
-.login-logo{
-  width:56px;height:56px;border-radius:12px;
-  background:linear-gradient(135deg,#082260,#1A5CC8);
-  display:inline-flex;align-items:center;justify-content:center;
-  margin-bottom:20px;
-}
+/* LOGIN */
+#login-gate{min-height:100vh;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#082260 0%,#0D2F7A 50%,#082260 100%);}
+.login-box{background:#fff;border-radius:16px;padding:48px 44px;width:min(440px,92vw);box-shadow:0 24px 64px rgba(8,34,96,.3);text-align:center;}
+.login-logo{width:56px;height:56px;border-radius:12px;background:linear-gradient(135deg,#082260,#1A5CC8);display:inline-flex;align-items:center;justify-content:center;margin-bottom:20px;}
 .login-logo svg{color:#fff;}
 .login-title{font-size:22px;font-weight:800;color:#082260;letter-spacing:-.02em;margin-bottom:6px;}
 .login-sub{font-size:13px;color:#6B87A8;margin-bottom:32px;}
-.login-field{
-  width:100%;border:1.5px solid #dde5f2;border-radius:8px;
-  padding:14px 16px;font-size:15px;font-family:inherit;
-  outline:none;transition:border-color .2s;
-  color:#1a2540;
-  margin-bottom:14px;
-  letter-spacing:.1em;
-}
+.login-field{width:100%;border:1.5px solid #dde5f2;border-radius:8px;padding:14px 16px;font-size:15px;font-family:inherit;outline:none;transition:border-color .2s;color:#1a2540;margin-bottom:14px;letter-spacing:.1em;}
 .login-field:focus{border-color:#0D2F7A;}
-.login-btn{
-  width:100%;background:#082260;color:#fff;
-  border:none;border-radius:8px;padding:15px;
-  font-family:inherit;font-size:15px;font-weight:700;
-  cursor:pointer;transition:background .2s;
-  letter-spacing:.04em;
-}
+.login-btn{width:100%;background:#082260;color:#fff;border:none;border-radius:8px;padding:15px;font-family:inherit;font-size:15px;font-weight:700;cursor:pointer;transition:background .2s;letter-spacing:.04em;}
 .login-btn:hover{background:#0D2F7A;}
 .login-err{color:#CC1E1E;font-size:13px;margin-top:10px;display:none;}
 
-/* ===== ADMIN APP ===== */
+/* APP */
 #admin-app{display:none;min-height:100vh;}
-
-.topbar{
-  position:sticky;top:0;z-index:100;
-  background:linear-gradient(90deg,#082260,#0D2F7A);
-  padding:0 5%;
-  display:flex;align-items:center;gap:16px;
-  height:60px;
-  box-shadow:0 2px 12px rgba(8,34,96,.25);
-}
-.topbar-brand{
-  display:flex;align-items:center;gap:10px;
-  font-size:15px;font-weight:700;color:#fff;letter-spacing:-.01em;
-}
+.topbar{position:sticky;top:0;z-index:100;background:linear-gradient(90deg,#082260,#0D2F7A);padding:0 5%;display:flex;align-items:center;gap:16px;height:60px;box-shadow:0 2px 12px rgba(8,34,96,.25);}
+.topbar-brand{display:flex;align-items:center;gap:10px;font-size:15px;font-weight:700;color:#fff;letter-spacing:-.01em;}
 .topbar-dot{width:8px;height:8px;border-radius:50%;background:#CC1E1E;}
-.topbar-tag{
-  font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;
-  background:rgba(255,255,255,.1);color:rgba(255,255,255,.8);
-  padding:3px 8px;border-radius:4px;margin-left:4px;
-}
+.topbar-tag{font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;background:rgba(255,255,255,.1);color:rgba(255,255,255,.8);padding:3px 8px;border-radius:4px;margin-left:4px;}
 .topbar-spacer{flex:1;}
-.topbar-logout{
-  font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;
-  color:rgba(255,255,255,.65);cursor:pointer;
-  padding:6px 12px;border-radius:6px;border:1px solid rgba(255,255,255,.15);
-  transition:all .2s;background:transparent;font-family:inherit;
-}
+.topbar-logout{font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:rgba(255,255,255,.65);cursor:pointer;padding:6px 12px;border-radius:6px;border:1px solid rgba(255,255,255,.15);transition:all .2s;background:transparent;font-family:inherit;}
 .topbar-logout:hover{background:rgba(255,255,255,.1);color:#fff;}
 
-/* Firebase warning banner */
-.fb-banner{
-  background:#fff3cd;border-bottom:2px solid #ffc107;
-  padding:12px 5%;
-  display:flex;align-items:center;gap:10px;
-  font-size:13px;color:#6d4c00;
-}
+.fb-banner{background:#fff3cd;border-bottom:2px solid #ffc107;padding:12px 5%;display:flex;align-items:center;gap:10px;font-size:13px;color:#6d4c00;}
 .fb-banner svg{flex-shrink:0;color:#ffc107;}
 .fb-banner a{color:#082260;font-weight:600;}
 
@@ -101,240 +41,109 @@ body{
 .page-title{font-size:28px;font-weight:800;color:#082260;letter-spacing:-.02em;margin-bottom:6px;}
 .page-sub{font-size:14px;color:#6B87A8;margin-bottom:36px;}
 
-/* ===== ADD PRODUCT CARD ===== */
-.add-prod-card{
-  background:#fff;border-radius:14px;
-  border:2px dashed #c5d3ea;
-  box-shadow:0 2px 8px rgba(8,34,96,.04);
-  margin-bottom:32px;
-  overflow:hidden;
-  transition:border-color .2s;
-}
+/* ADD PRODUCT */
+.add-prod-card{background:#fff;border-radius:14px;border:2px dashed #c5d3ea;box-shadow:0 2px 8px rgba(8,34,96,.04);margin-bottom:32px;overflow:hidden;transition:border-color .2s;}
 .add-prod-card:hover{border-color:#082260;}
-.add-prod-header{
-  display:flex;align-items:center;gap:12px;
-  padding:18px 28px;cursor:pointer;
-  user-select:none;
-}
-.add-prod-title{
-  display:flex;align-items:center;gap:10px;
-  font-size:15px;font-weight:700;color:#082260;
-}
-.add-prod-title-icon{
-  width:32px;height:32px;border-radius:8px;
-  background:linear-gradient(135deg,#082260,#1A5CC8);
-  display:inline-flex;align-items:center;justify-content:center;
-  flex-shrink:0;
-}
+.add-prod-header{display:flex;align-items:center;gap:12px;padding:18px 28px;cursor:pointer;user-select:none;}
+.add-prod-title{display:flex;align-items:center;gap:10px;font-size:15px;font-weight:700;color:#082260;}
+.add-prod-title-icon{width:32px;height:32px;border-radius:8px;background:linear-gradient(135deg,#082260,#1A5CC8);display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;}
 .add-prod-chevron{color:#6B87A8;transition:transform .25s;flex-shrink:0;margin-left:auto;}
 .add-prod-chevron.open{transform:rotate(180deg);}
 .add-prod-body{padding:0 28px 28px;display:none;}
 .add-prod-body.open{display:block;}
 .add-prod-form{display:flex;gap:24px;flex-wrap:wrap;}
-
-/* New product image upload area */
 .new-prod-img-wrap{flex-shrink:0;}
-.new-prod-img-area{
-  width:140px;height:140px;border-radius:12px;
-  border:2px dashed #c5d3ea;background:#f5f8ff;
-  display:flex;flex-direction:column;align-items:center;justify-content:center;
-  cursor:pointer;transition:all .2s;overflow:hidden;position:relative;
-}
+.new-prod-img-area{width:140px;height:140px;border-radius:12px;border:2px dashed #c5d3ea;background:#f5f8ff;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;transition:all .2s;overflow:hidden;position:relative;}
 .new-prod-img-area:hover{border-color:#082260;background:#eef2ff;}
-.new-prod-img-area img{
-  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
-}
-.new-prod-img-area .img-placeholder{
-  display:flex;flex-direction:column;align-items:center;gap:8px;
-  color:#6B87A8;pointer-events:none;
-}
+.new-prod-img-area img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
+.new-prod-img-area .img-placeholder{display:flex;flex-direction:column;align-items:center;gap:8px;color:#6B87A8;pointer-events:none;}
 .new-prod-img-area .img-placeholder span{font-size:11px;font-weight:600;letter-spacing:.04em;}
-
-/* Add product fields */
 .add-prod-fields{flex:1;min-width:240px;display:flex;flex-direction:column;gap:14px;}
 .field-group{display:flex;flex-direction:column;gap:5px;}
 .field-group label{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#6B87A8;}
-.field-input{
-  border:1.5px solid #dde5f2;border-radius:8px;
-  padding:10px 14px;font-size:14px;font-family:inherit;
-  color:#1a2540;outline:none;transition:border-color .2s;background:#fff;
-  width:100%;
-}
+.field-input{border:1.5px solid #dde5f2;border-radius:8px;padding:10px 14px;font-size:14px;font-family:inherit;color:#1a2540;outline:none;transition:border-color .2s;background:#fff;width:100%;}
 .field-input:focus{border-color:#0D2F7A;}
 .field-row{display:flex;gap:12px;}
 .field-row .field-group{flex:1;}
-.field-select{
-  border:1.5px solid #dde5f2;border-radius:8px;
-  padding:10px 14px;font-size:13px;font-family:inherit;font-weight:600;
-  color:#1a2540;outline:none;background:#fff;cursor:pointer;width:100%;
-}
+.field-select{border:1.5px solid #dde5f2;border-radius:8px;padding:10px 14px;font-size:13px;font-family:inherit;font-weight:600;color:#1a2540;outline:none;background:#fff;cursor:pointer;width:100%;}
 .field-select:focus{border-color:#0D2F7A;}
-.add-prod-submit-btn{
-  display:inline-flex;align-items:center;gap:8px;
-  background:#082260;color:#fff;border:none;border-radius:8px;
-  padding:12px 24px;font-size:13px;font-weight:700;letter-spacing:.06em;
-  cursor:pointer;font-family:inherit;transition:background .2s;
-  align-self:flex-start;
-}
+.add-prod-submit-btn{display:inline-flex;align-items:center;gap:8px;background:#082260;color:#fff;border:none;border-radius:8px;padding:12px 24px;font-size:13px;font-weight:700;letter-spacing:.06em;cursor:pointer;font-family:inherit;transition:background .2s;align-self:flex-start;}
 .add-prod-submit-btn:hover{background:#0D2F7A;}
 
-/* ===== SECTION CARD ===== */
-.section-card{
-  background:#fff;border-radius:14px;
-  border:1px solid #dde5f2;
-  box-shadow:0 2px 8px rgba(8,34,96,.05);
-  margin-bottom:32px;
-  overflow:hidden;
-}
-.section-head{
-  display:flex;align-items:center;gap:14px;
-  padding:16px 28px;
-  border-bottom:2px solid #eef2fb;
-  background:linear-gradient(90deg,#f5f8ff,#fff);
-  flex-wrap:wrap;
-}
-
-/* Product image thumbnail */
-.prod-img-thumb{
-  width:72px;height:72px;border-radius:10px;
-  overflow:hidden;cursor:pointer;
-  position:relative;flex-shrink:0;
-  background:#f0f4fb;
-  border:2px solid #dde5f2;
-  transition:border-color .2s;
-}
+/* SECTION CARD */
+.section-card{background:#fff;border-radius:14px;border:1px solid #dde5f2;box-shadow:0 2px 8px rgba(8,34,96,.05);margin-bottom:32px;overflow:hidden;}
+.section-head{display:flex;align-items:center;gap:14px;padding:16px 28px;border-bottom:2px solid #eef2fb;background:linear-gradient(90deg,#f5f8ff,#fff);flex-wrap:wrap;}
+.prod-img-thumb{width:72px;height:72px;border-radius:10px;overflow:hidden;cursor:pointer;position:relative;flex-shrink:0;background:#f0f4fb;border:2px solid #dde5f2;transition:border-color .2s;}
 .prod-img-thumb:hover{border-color:#082260;}
 .prod-img-thumb img{width:100%;height:100%;object-fit:cover;display:block;}
-.prod-img-thumb .img-overlay{
-  position:absolute;inset:0;
-  background:rgba(8,34,96,.55);
-  display:flex;align-items:center;justify-content:center;
-  opacity:0;transition:opacity .2s;
-}
+.prod-img-thumb .img-overlay{position:absolute;inset:0;background:rgba(8,34,96,.55);display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .2s;}
 .prod-img-thumb:hover .img-overlay{opacity:1;}
-
-/* Meta inputs */
 .section-meta{display:flex;flex-direction:column;gap:5px;flex:1;min-width:200px;}
-.meta-input{
-  border:1.5px solid transparent;border-radius:6px;
-  padding:5px 8px;font-family:inherit;
-  background:transparent;transition:all .2s;
-  outline:none;width:100%;
-}
+.meta-input{border:1.5px solid transparent;border-radius:6px;padding:5px 8px;font-family:inherit;background:transparent;transition:all .2s;outline:none;width:100%;}
 .meta-input:hover{background:#f5f8ff;border-color:#dde5f2;}
 .meta-input:focus{background:#fff;border-color:#0D2F7A;}
 .meta-name-input{font-size:16px;font-weight:700;color:#082260;}
 .meta-desc-input{font-size:12px;color:#6B87A8;}
 .meta-badge-row{display:flex;gap:6px;align-items:center;}
 .meta-badge-input{font-size:12px;flex:1;}
-.meta-badge-type-select{
-  border:1.5px solid #dde5f2;border-radius:6px;
-  padding:4px 8px;font-family:inherit;font-size:11px;font-weight:600;
-  color:#6B87A8;background:#f5f8ff;cursor:pointer;outline:none;white-space:nowrap;
-}
+.meta-badge-type-select{border:1.5px solid #dde5f2;border-radius:6px;padding:4px 8px;font-family:inherit;font-size:11px;font-weight:600;color:#6B87A8;background:#f5f8ff;cursor:pointer;outline:none;white-space:nowrap;}
 .meta-badge-type-select:focus{border-color:#0D2F7A;}
-
 .section-head-spacer{flex:1;}
 .section-head-actions{display:flex;gap:8px;align-items:center;flex-wrap:wrap;}
-
-.add-row-btn{
-  display:inline-flex;align-items:center;gap:6px;
-  background:#082260;color:#fff;border:none;border-radius:7px;
-  padding:9px 16px;font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
-  cursor:pointer;font-family:inherit;transition:background .2s;white-space:nowrap;
-}
+.add-row-btn{display:inline-flex;align-items:center;gap:6px;background:#082260;color:#fff;border:none;border-radius:7px;padding:9px 16px;font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;font-family:inherit;transition:background .2s;white-space:nowrap;}
 .add-row-btn:hover{background:#0D2F7A;}
-
-.del-prod-btn{
-  display:inline-flex;align-items:center;gap:6px;
-  background:#fce8e8;color:#CC1E1E;border:none;border-radius:7px;
-  padding:9px 14px;font-size:12px;font-weight:700;letter-spacing:.04em;
-  cursor:pointer;font-family:inherit;transition:all .2s;white-space:nowrap;
-}
+.del-prod-btn{display:inline-flex;align-items:center;gap:6px;background:#fce8e8;color:#CC1E1E;border:none;border-radius:7px;padding:9px 14px;font-size:12px;font-weight:700;letter-spacing:.04em;cursor:pointer;font-family:inherit;transition:all .2s;white-space:nowrap;}
 .del-prod-btn:hover{background:#CC1E1E;color:#fff;}
 
-/* Table */
+/* COLUMN MANAGER */
+.col-manager{padding:14px 28px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;border-bottom:1px solid #eef2fb;background:#fafbff;}
+.col-manager-label{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#9aa8bf;white-space:nowrap;margin-right:4px;}
+.col-chips{display:flex;flex-wrap:wrap;gap:6px;flex:1;}
+.col-chip{display:inline-flex;align-items:center;gap:4px;background:#eef2fb;border:1px solid #dde5f2;border-radius:999px;padding:4px 6px 4px 11px;font-size:12px;font-weight:600;color:#1a2540;user-select:none;}
+.col-chip-del{width:18px;height:18px;border-radius:50%;background:transparent;color:#9aa8bf;font-size:13px;display:inline-flex;align-items:center;justify-content:center;border:none;cursor:pointer;font-family:inherit;transition:all .15s;line-height:1;padding:0;}
+.col-chip-del:hover{background:#CC1E1E;color:#fff;}
+.add-col-btn{display:inline-flex;align-items:center;gap:5px;background:transparent;color:#082260;border:1.5px dashed #c5d3ea;border-radius:999px;padding:4px 12px;font-size:12px;font-weight:600;cursor:pointer;font-family:inherit;transition:all .2s;white-space:nowrap;}
+.add-col-btn:hover{border-color:#082260;background:#eef2fb;}
+.add-col-form{display:none;align-items:center;gap:6px;}
+.add-col-form.visible{display:flex;}
+.add-col-input{border:1.5px solid #dde5f2;border-radius:6px;padding:5px 10px;font-size:12px;font-family:inherit;color:#1a2540;outline:none;width:150px;transition:border-color .2s;}
+.add-col-input:focus{border-color:#0D2F7A;}
+.add-col-ok{background:#082260;color:#fff;border:none;border-radius:6px;padding:5px 12px;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit;white-space:nowrap;}
+.add-col-ok:hover{background:#0D2F7A;}
+.add-col-cancel{background:#f0f4fb;color:#6B87A8;border:none;border-radius:6px;width:26px;height:26px;font-size:15px;cursor:pointer;font-family:inherit;display:inline-flex;align-items:center;justify-content:center;}
+.add-col-cancel:hover{background:#dde5f2;}
+
+/* TABLE */
 .section-body{padding:0 28px 24px;overflow-x:auto;}
-.admin-table{
-  width:100%;border-collapse:collapse;min-width:700px;
-  margin-top:20px;
-}
-.admin-table thead th{
-  background:#f0f4fb;padding:10px 12px;
-  text-align:left;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
-  color:#6B87A8;white-space:nowrap;
-}
+.admin-table{width:100%;border-collapse:collapse;min-width:500px;margin-top:20px;}
+.admin-table thead th{background:#f0f4fb;padding:10px 12px;text-align:left;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#6B87A8;white-space:nowrap;}
 .admin-table thead th:first-child{border-radius:8px 0 0 8px;width:44px;}
-.admin-table thead th:last-child{border-radius:0 8px 8px 0;width:56px;}
+.admin-table thead th:last-child{border-radius:0 8px 8px 0;width:52px;}
 .admin-table tbody tr{border-bottom:1px solid #f0f4fb;}
 .admin-table tbody tr:last-child{border-bottom:none;}
 .admin-table tbody td{padding:8px 12px;vertical-align:middle;}
 .admin-table .row-num{font-size:11px;color:#9aa8bf;font-weight:600;}
-.admin-table input{
-  width:100%;border:1.5px solid #e5eaf5;border-radius:6px;
-  padding:8px 10px;font-size:13px;font-family:inherit;color:#1a2540;
-  outline:none;transition:border-color .2s;background:#fff;
-}
+.admin-table input{width:100%;border:1.5px solid #e5eaf5;border-radius:6px;padding:8px 10px;font-size:13px;font-family:inherit;color:#1a2540;outline:none;transition:border-color .2s;background:#fff;min-width:80px;}
 .admin-table input:focus{border-color:#0D2F7A;}
-.col-code{min-width:160px;}
-.col-size{min-width:180px;}
-.col-class{min-width:70px;}
-.col-pn{min-width:80px;}
-.col-price{min-width:120px;}
-.del-btn{
-  width:32px;height:32px;border-radius:6px;border:none;cursor:pointer;
-  background:#fce8e8;color:#CC1E1E;
-  display:inline-flex;align-items:center;justify-content:center;
-  font-family:inherit;transition:all .2s;
-}
+.del-btn{width:32px;height:32px;border-radius:6px;border:none;cursor:pointer;background:#fce8e8;color:#CC1E1E;display:inline-flex;align-items:center;justify-content:center;font-family:inherit;transition:all .2s;}
 .del-btn:hover{background:#CC1E1E;color:#fff;}
 
-/* Save / footer */
-.section-footer{
-  padding:16px 28px 20px;
-  border-top:1px solid #f0f4fb;
-  display:flex;align-items:center;justify-content:flex-end;gap:12px;
-}
-.save-btn{
-  display:inline-flex;align-items:center;gap:8px;
-  background:#082260;color:#fff;border:none;border-radius:8px;
-  padding:11px 24px;font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
-  cursor:pointer;font-family:inherit;transition:background .2s,transform .15s;
-}
+/* FOOTER */
+.section-footer{padding:16px 28px 20px;border-top:1px solid #f0f4fb;display:flex;align-items:center;justify-content:flex-end;gap:12px;}
+.save-btn{display:inline-flex;align-items:center;gap:8px;background:#082260;color:#fff;border:none;border-radius:8px;padding:11px 24px;font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;font-family:inherit;transition:background .2s,transform .15s;}
 .save-btn:hover{background:#0D2F7A;transform:translateY(-1px);}
 .save-btn.saving{opacity:.7;pointer-events:none;}
 .save-label{font-size:13px;color:#6B87A8;}
 
-/* Loading / empty states */
-.loading-state{
-  display:flex;align-items:center;justify-content:center;gap:12px;
-  padding:60px 28px;color:#6B87A8;font-size:14px;
-}
+/* STATES */
+.loading-state{display:flex;align-items:center;justify-content:center;gap:12px;padding:60px 28px;color:#6B87A8;font-size:14px;}
 @keyframes spin{to{transform:rotate(360deg);}}
-.spinner{
-  width:24px;height:24px;border:2.5px solid #dde5f2;
-  border-top-color:#082260;border-radius:50%;
-  animation:spin .8s linear infinite;
-}
-.empty-state{
-  text-align:center;padding:48px 28px;color:#9aa8bf;font-size:14px;
-  background:#fff;border-radius:14px;border:1px solid #dde5f2;
-}
+.spinner{width:24px;height:24px;border:2.5px solid #dde5f2;border-top-color:#082260;border-radius:50%;animation:spin .8s linear infinite;}
+.empty-state{text-align:center;padding:48px 28px;color:#9aa8bf;font-size:14px;background:#fff;border-radius:14px;border:1px solid #dde5f2;}
 .empty-state svg{margin:0 auto 12px;display:block;color:#c5d3ea;}
 
-/* Toast */
-#toast{
-  position:fixed;bottom:28px;right:28px;z-index:999;
-  display:flex;align-items:center;gap:10px;
-  background:#082260;color:#fff;
-  padding:14px 20px;border-radius:10px;
-  font-size:14px;font-weight:600;
-  box-shadow:0 8px 28px rgba(8,34,96,.35);
-  transform:translateY(80px);opacity:0;
-  transition:transform .3s cubic-bezier(.23,1,.32,1),opacity .3s ease;
-  pointer-events:none;
-  max-width:calc(100vw - 56px);
-}
+/* TOAST */
+#toast{position:fixed;bottom:28px;right:28px;z-index:999;display:flex;align-items:center;gap:10px;background:#082260;color:#fff;padding:14px 20px;border-radius:10px;font-size:14px;font-weight:600;box-shadow:0 8px 28px rgba(8,34,96,.35);transform:translateY(80px);opacity:0;transition:transform .3s cubic-bezier(.23,1,.32,1),opacity .3s ease;pointer-events:none;max-width:calc(100vw - 56px);}
 #toast.show{transform:translateY(0);opacity:1;}
 #toast.error{background:#CC1E1E;}
 #toast svg{flex-shrink:0;}
@@ -342,7 +151,7 @@ body{
 </head>
 <body>
 
-<!-- ===== LOGIN GATE ===== -->
+<!-- LOGIN -->
 <div id="login-gate">
   <div class="login-box">
     <div class="login-logo">
@@ -356,9 +165,8 @@ body{
   </div>
 </div>
 
-<!-- ===== ADMIN APP ===== -->
+<!-- ADMIN APP -->
 <div id="admin-app">
-
   <header class="topbar">
     <div class="topbar-brand">
       <div class="topbar-dot"></div>
@@ -378,7 +186,7 @@ body{
     <div class="page-title">Бүтээгдэхүүн &amp; Үнийн мэдээлэл</div>
     <div class="page-sub" id="pageSubText">Firebase холбогдсон — хадгалсан өөрчлөлт шууд сайт дээр тусна.</div>
 
-    <!-- ===== ADD NEW PRODUCT ===== -->
+    <!-- ADD NEW PRODUCT -->
     <div class="add-prod-card">
       <div class="add-prod-header" onclick="toggleAddProd()">
         <div class="add-prod-title">
@@ -391,26 +199,17 @@ body{
       </div>
       <div class="add-prod-body" id="add-prod-body">
         <div class="add-prod-form">
-
-          <!-- Image upload -->
           <div class="new-prod-img-wrap">
-            <div class="new-prod-img-area" id="new-prod-img-area"
-                 onclick="document.getElementById('new-prod-img-input').click()"
-                 title="Зураг оруулах">
+            <div class="new-prod-img-area" id="new-prod-img-area" onclick="document.getElementById('new-prod-img-input').click()" title="Зураг оруулах">
               <img id="new-prod-img-preview" src="" style="display:none" onerror="this.style.display='none'"/>
               <div class="img-placeholder" id="new-prod-img-placeholder">
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
-                  <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
-                  <circle cx="12" cy="13" r="4"/>
-                </svg>
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
                 <span>Зураг оруулах</span>
               </div>
             </div>
             <input type="file" id="new-prod-img-input" accept="image/*" style="display:none" onchange="handleNewProdImage(this)"/>
             <div style="margin-top:6px;font-size:11px;color:#9aa8bf;text-align:center;">JPEG/PNG · 500KB хүртэл</div>
           </div>
-
-          <!-- Fields -->
           <div class="add-prod-fields">
             <div class="field-group">
               <label>Бүтээгдэхүүний нэр *</label>
@@ -438,12 +237,11 @@ body{
               Бүтээгдэхүүн нэмэх
             </button>
           </div>
-
         </div>
       </div>
     </div>
 
-    <!-- ===== DYNAMIC PRODUCT SECTIONS ===== -->
+    <!-- PRODUCT SECTIONS -->
     <div id="product-sections">
       <div class="loading-state" id="loading-state">
         <div class="spinner"></div>
@@ -451,8 +249,8 @@ body{
       </div>
     </div>
 
-  </div><!-- /page -->
-</div><!-- /admin-app -->
+  </div>
+</div>
 
 <!-- TOAST -->
 <div id="toast">
@@ -462,7 +260,7 @@ body{
 
 <script>
 /* ============================================================
-   CONFIGURATION — MUST MATCH Amirbayar.html
+   CONFIG
    ============================================================ */
 const ADMIN_PASSWORD = "amirbayar2024";
 
@@ -477,47 +275,51 @@ const FB_CONFIG = {
 };
 
 /* ============================================================
-   DEFAULT DATA
+   DEFAULT COLUMNS & PRODUCTS
    ============================================================ */
+const DEFAULT_COLUMNS = [
+  { id:"code",   label:"Барааны код" },
+  { id:"size",   label:"Хэмжээ" },
+  { id:"sclass", label:"S класс" },
+  { id:"pn",     label:"PN" },
+  { id:"price",  label:"Нэгж үнэ (₮)" }
+];
+
 const DEFAULT_PRODUCTS = [
   {
-    key: "cw",
-    name: "Хүйтэн усны хоолой",
-    desc: "Cold Water Pipe · Ø16–160 мм · 4 м урт · ISO 15874",
-    badge: "PN12.5 · S4",
-    badgeType: "cw",
-    image: "assets/pipes-cw.jpg",
-    items: [
-      { code:"PPR-CW/S4/16×2.2",   size:"Ø16 × 2.2 мм · 4 м",   sclass:"S4", pn:"PN12.5", price:"1,800" },
-      { code:"PPR-CW/S4/20×2.5",   size:"Ø20 × 2.5 мм · 4 м",   sclass:"S4", pn:"PN12.5", price:"2,800" },
-      { code:"PPR-CW/S4/25×3.5",   size:"Ø25 × 3.5 мм · 4 м",   sclass:"S4", pn:"PN12.5", price:"4,000" },
-      { code:"PPR-CW/S4/32×4.4",   size:"Ø32 × 4.4 мм · 4 м",   sclass:"S4", pn:"PN12.5", price:"7,000" },
-      { code:"PPR-CW/S4/40×5.5",   size:"Ø40 × 5.5 мм · 4 м",   sclass:"S4", pn:"PN12.5", price:"10,000" },
-      { code:"PPR-CW/S4/50×6.9",   size:"Ø50 × 6.9 мм · 4 м",   sclass:"S4", pn:"PN12.5", price:"15,000" },
-      { code:"PPR-CW/S4/63×8.6",   size:"Ø63 × 8.6 мм · 4 м",   sclass:"S4", pn:"PN12.5", price:"22,000" },
-      { code:"PPR-CW/S4/75×10.3",  size:"Ø75 × 10.3 мм · 4 м",  sclass:"S4", pn:"PN12.5", price:"32,000" },
-      { code:"PPR-CW/S4/90×12.3",  size:"Ø90 × 12.3 мм · 4 м",  sclass:"S4", pn:"PN12.5", price:"46,000" },
-      { code:"PPR-CW/S4/110×15",   size:"Ø110 × 15 мм · 4 м",   sclass:"S4", pn:"PN12.5", price:"68,000" },
-      { code:"PPR-CW/S4/160×21.9", size:"Ø160 × 21.9 мм · 4 м", sclass:"S4", pn:"PN12.5", price:"145,000" }
+    key:"cw", name:"Хүйтэн усны хоолой",
+    desc:"Cold Water Pipe · Ø16–160 мм · 4 м урт · ISO 15874",
+    badge:"PN12.5 · S4", badgeType:"cw", image:"assets/pipes-cw.jpg",
+    columns: DEFAULT_COLUMNS,
+    items:[
+      {code:"PPR-CW/S4/16×2.2",   size:"Ø16 × 2.2 мм · 4 м",   sclass:"S4", pn:"PN12.5", price:"1,800"},
+      {code:"PPR-CW/S4/20×2.5",   size:"Ø20 × 2.5 мм · 4 м",   sclass:"S4", pn:"PN12.5", price:"2,800"},
+      {code:"PPR-CW/S4/25×3.5",   size:"Ø25 × 3.5 мм · 4 м",   sclass:"S4", pn:"PN12.5", price:"4,000"},
+      {code:"PPR-CW/S4/32×4.4",   size:"Ø32 × 4.4 мм · 4 м",   sclass:"S4", pn:"PN12.5", price:"7,000"},
+      {code:"PPR-CW/S4/40×5.5",   size:"Ø40 × 5.5 мм · 4 м",   sclass:"S4", pn:"PN12.5", price:"10,000"},
+      {code:"PPR-CW/S4/50×6.9",   size:"Ø50 × 6.9 мм · 4 м",   sclass:"S4", pn:"PN12.5", price:"15,000"},
+      {code:"PPR-CW/S4/63×8.6",   size:"Ø63 × 8.6 мм · 4 м",   sclass:"S4", pn:"PN12.5", price:"22,000"},
+      {code:"PPR-CW/S4/75×10.3",  size:"Ø75 × 10.3 мм · 4 м",  sclass:"S4", pn:"PN12.5", price:"32,000"},
+      {code:"PPR-CW/S4/90×12.3",  size:"Ø90 × 12.3 мм · 4 м",  sclass:"S4", pn:"PN12.5", price:"46,000"},
+      {code:"PPR-CW/S4/110×15",   size:"Ø110 × 15 мм · 4 м",   sclass:"S4", pn:"PN12.5", price:"68,000"},
+      {code:"PPR-CW/S4/160×21.9", size:"Ø160 × 21.9 мм · 4 м", sclass:"S4", pn:"PN12.5", price:"145,000"}
     ]
   },
   {
-    key: "hw",
-    name: "Халуун усны хоолой",
-    desc: "Hot Water Pipe · Ø20–110 мм · 4 м урт · ISO 15874",
-    badge: "PN20 · S2.5",
-    badgeType: "hw",
-    image: "assets/pipes-blue.jpg",
-    items: [
-      { code:"PPR-HW/S2.5/20×3.4",   size:"Ø20 × 3.4 мм · 4 м",   sclass:"S2.5", pn:"PN20", price:"3,500" },
-      { code:"PPR-HW/S2.5/25×4.2",   size:"Ø25 × 4.2 мм · 4 м",   sclass:"S2.5", pn:"PN20", price:"5,100" },
-      { code:"PPR-HW/S2.5/32×5.4",   size:"Ø32 × 5.4 мм · 4 м",   sclass:"S2.5", pn:"PN20", price:"8,500" },
-      { code:"PPR-HW/S2.5/40×6.7",   size:"Ø40 × 6.7 мм · 4 м",   sclass:"S2.5", pn:"PN20", price:"13,000" },
-      { code:"PPR-HW/S2.5/50×8.3",   size:"Ø50 × 8.3 мм · 4 м",   sclass:"S2.5", pn:"PN20", price:"19,000" },
-      { code:"PPR-HW/S2.5/63×10.5",  size:"Ø63 × 10.5 мм · 4 м",  sclass:"S2.5", pn:"PN20", price:"30,000" },
-      { code:"PPR-HW/S2.5/75×12.5",  size:"Ø75 × 12.5 мм · 4 м",  sclass:"S2.5", pn:"PN20", price:"44,000" },
-      { code:"PPR-HW/S2.5/90×15",    size:"Ø90 × 15 мм · 4 м",    sclass:"S2.5", pn:"PN20", price:"63,000" },
-      { code:"PPR-HW/S2.5/110×18.3", size:"Ø110 × 18.3 мм · 4 м", sclass:"S2.5", pn:"PN20", price:"94,000" }
+    key:"hw", name:"Халуун усны хоолой",
+    desc:"Hot Water Pipe · Ø20–110 мм · 4 м урт · ISO 15874",
+    badge:"PN20 · S2.5", badgeType:"hw", image:"assets/pipes-blue.jpg",
+    columns: DEFAULT_COLUMNS,
+    items:[
+      {code:"PPR-HW/S2.5/20×3.4",   size:"Ø20 × 3.4 мм · 4 м",   sclass:"S2.5", pn:"PN20", price:"3,500"},
+      {code:"PPR-HW/S2.5/25×4.2",   size:"Ø25 × 4.2 мм · 4 м",   sclass:"S2.5", pn:"PN20", price:"5,100"},
+      {code:"PPR-HW/S2.5/32×5.4",   size:"Ø32 × 5.4 мм · 4 м",   sclass:"S2.5", pn:"PN20", price:"8,500"},
+      {code:"PPR-HW/S2.5/40×6.7",   size:"Ø40 × 6.7 мм · 4 м",   sclass:"S2.5", pn:"PN20", price:"13,000"},
+      {code:"PPR-HW/S2.5/50×8.3",   size:"Ø50 × 8.3 мм · 4 м",   sclass:"S2.5", pn:"PN20", price:"19,000"},
+      {code:"PPR-HW/S2.5/63×10.5",  size:"Ø63 × 10.5 мм · 4 м",  sclass:"S2.5", pn:"PN20", price:"30,000"},
+      {code:"PPR-HW/S2.5/75×12.5",  size:"Ø75 × 12.5 мм · 4 м",  sclass:"S2.5", pn:"PN20", price:"44,000"},
+      {code:"PPR-HW/S2.5/90×15",    size:"Ø90 × 15 мм · 4 м",    sclass:"S2.5", pn:"PN20", price:"63,000"},
+      {code:"PPR-HW/S2.5/110×18.3", size:"Ø110 × 18.3 мм · 4 м", sclass:"S2.5", pn:"PN20", price:"94,000"}
     ]
   }
 ];
@@ -526,8 +328,20 @@ const DEFAULT_PRODUCTS = [
    STATE
    ============================================================ */
 let DB = null;
-const PROD_IMAGES = {};   // key → data URL or asset path
-let NEW_PROD_IMAGE = "";  // staging area for add-product form
+const PROD_IMAGES  = {};   // key → data URL or asset path
+const PROD_COLUMNS = {};   // key → [{id, label}, ...]
+let   NEW_PROD_IMAGE = "";
+
+/* ============================================================
+   HELPERS
+   ============================================================ */
+function esc(s){
+  return String(s||"").replace(/&/g,"&amp;").replace(/"/g,"&quot;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+}
+function getCols(key){
+  return PROD_COLUMNS[key] || JSON.parse(JSON.stringify(DEFAULT_COLUMNS));
+}
+function genId(){ return "c" + Date.now().toString(36) + Math.random().toString(36).slice(2,5); }
 
 /* ============================================================
    LOGIN
@@ -543,74 +357,58 @@ function doLogin(){
     document.getElementById("pwField").focus();
   }
 }
-document.getElementById("pwField").addEventListener("keydown", e => {
-  if(e.key === "Enter") doLogin();
-});
-
-function doLogout(){
-  try{ sessionStorage.removeItem("ab_admin"); }catch(e){}
-  location.reload();
-}
-
+document.getElementById("pwField").addEventListener("keydown", e => { if(e.key==="Enter") doLogin(); });
+function doLogout(){ try{ sessionStorage.removeItem("ab_admin"); }catch(e){} location.reload(); }
 function showApp(){
   document.getElementById("login-gate").style.display = "none";
   document.getElementById("admin-app").style.display = "block";
   initFirebase();
 }
-
-try{ if(sessionStorage.getItem("ab_admin") === "1") showApp(); }catch(e){}
+try{ if(sessionStorage.getItem("ab_admin")==="1") showApp(); }catch(e){}
 
 /* ============================================================
-   ADD-PRODUCT PANEL TOGGLE
+   ADD PRODUCT TOGGLE
    ============================================================ */
 function toggleAddProd(){
-  const body    = document.getElementById("add-prod-body");
-  const chevron = document.getElementById("add-prod-chevron");
-  body.classList.toggle("open");
-  chevron.classList.toggle("open");
+  document.getElementById("add-prod-body").classList.toggle("open");
+  document.getElementById("add-prod-chevron").classList.toggle("open");
 }
 
 /* ============================================================
    IMAGE COMPRESSION
    ============================================================ */
 function compressImage(file, callback){
-  const MAX_W = 800, QUALITY = 0.72;
   const reader = new FileReader();
   reader.onload = e => {
     const img = new Image();
     img.onload = () => {
+      const MAX_W = 800, Q = 0.72;
       const canvas = document.createElement("canvas");
       let w = img.width, h = img.height;
-      if(w > MAX_W){ h = Math.round(h * MAX_W / w); w = MAX_W; }
+      if(w > MAX_W){ h = Math.round(h*MAX_W/w); w = MAX_W; }
       canvas.width = w; canvas.height = h;
-      canvas.getContext("2d").drawImage(img, 0, 0, w, h);
-      callback(canvas.toDataURL("image/jpeg", QUALITY));
+      canvas.getContext("2d").drawImage(img,0,0,w,h);
+      callback(canvas.toDataURL("image/jpeg", Q));
     };
     img.src = e.target.result;
   };
   reader.readAsDataURL(file);
 }
-
 function handleNewProdImage(input){
-  const file = input.files[0];
-  if(!file) return;
-  compressImage(file, dataUrl => {
-    NEW_PROD_IMAGE = dataUrl;
-    const preview     = document.getElementById("new-prod-img-preview");
-    const placeholder = document.getElementById("new-prod-img-placeholder");
-    preview.src = dataUrl;
-    preview.style.display = "block";
-    placeholder.style.display = "none";
+  const file = input.files[0]; if(!file) return;
+  compressImage(file, url => {
+    NEW_PROD_IMAGE = url;
+    const p = document.getElementById("new-prod-img-preview");
+    const ph = document.getElementById("new-prod-img-placeholder");
+    p.src = url; p.style.display = "block"; ph.style.display = "none";
   });
 }
-
 function handleProdImageChange(input, key){
-  const file = input.files[0];
-  if(!file) return;
-  compressImage(file, dataUrl => {
-    PROD_IMAGES[key] = dataUrl;
-    const preview = document.getElementById("img-preview-"+key);
-    if(preview){ preview.src = dataUrl; preview.style.opacity = "1"; }
+  const file = input.files[0]; if(!file) return;
+  compressImage(file, url => {
+    PROD_IMAGES[key] = url;
+    const p = document.getElementById("img-preview-"+key);
+    if(p){ p.src = url; p.style.opacity="1"; }
     showToast("Зураг солигдлаа — Хадгалах дарна уу");
   });
 }
@@ -621,59 +419,38 @@ function handleProdImageChange(input, key){
 function submitNewProduct(){
   const name = document.getElementById("new-prod-name").value.trim();
   if(!name){ showToast("Бүтээгдэхүүний нэр оруулна уу", true); return; }
-
   const desc      = document.getElementById("new-prod-desc").value.trim();
   const badge     = document.getElementById("new-prod-badge").value.trim();
   const badgeType = document.getElementById("new-prod-badge-type").value;
   const key       = "prod_" + Date.now().toString(36);
 
-  PROD_IMAGES[key] = NEW_PROD_IMAGE;
+  PROD_IMAGES[key]  = NEW_PROD_IMAGE;
+  PROD_COLUMNS[key] = JSON.parse(JSON.stringify(DEFAULT_COLUMNS));
 
-  // Remove loading/empty placeholders
-  ["loading-state","empty-state"].forEach(id => {
-    const el = document.getElementById(id);
-    if(el) el.remove();
-  });
+  ["loading-state","empty-state"].forEach(id => { document.getElementById(id)?.remove(); });
+  appendSection({ key, name, desc, badge, badgeType, image:NEW_PROD_IMAGE, columns:PROD_COLUMNS[key], items:[] });
 
-  appendSection({ key, name, desc, badge, badgeType, image: NEW_PROD_IMAGE, items: [] });
-
-  // Reset form
-  document.getElementById("new-prod-name").value  = "";
-  document.getElementById("new-prod-desc").value  = "";
-  document.getElementById("new-prod-badge").value = "";
+  // reset form
+  ["new-prod-name","new-prod-desc","new-prod-badge"].forEach(id => document.getElementById(id).value="");
   document.getElementById("new-prod-badge-type").value = "cw";
-  const preview = document.getElementById("new-prod-img-preview");
-  preview.src = ""; preview.style.display = "none";
-  document.getElementById("new-prod-img-placeholder").style.display = "flex";
-  document.getElementById("new-prod-img-input").value = "";
+  const p = document.getElementById("new-prod-img-preview");
+  p.src=""; p.style.display="none";
+  document.getElementById("new-prod-img-placeholder").style.display="flex";
+  document.getElementById("new-prod-img-input").value="";
   NEW_PROD_IMAGE = "";
-
-  // Collapse panel
   document.getElementById("add-prod-body").classList.remove("open");
   document.getElementById("add-prod-chevron").classList.remove("open");
-
   showToast("Бүтээгдэхүүн нэмэгдлээ — Хадгалах дарна уу");
 }
 
 /* ============================================================
-   SECTION RENDERING
+   ROW HTML  (dynamic columns)
    ============================================================ */
-function esc(s){
-  return String(s||"")
-    .replace(/&/g,"&amp;")
-    .replace(/"/g,"&quot;")
-    .replace(/</g,"&lt;")
-    .replace(/>/g,"&gt;");
-}
-
-function rowHTML(r, i, key){
+function rowHTML(vals, i, key){
+  const cols = getCols(key);
   return `<tr>
     <td class="row-num">${i+1}</td>
-    <td><input class="col-code"  value="${esc(r.code)}"   placeholder="Барааны код"/></td>
-    <td><input class="col-size"  value="${esc(r.size)}"   placeholder="Хэмжээ"/></td>
-    <td><input class="col-class" value="${esc(r.sclass)}" placeholder="S4"/></td>
-    <td><input class="col-pn"    value="${esc(r.pn)}"     placeholder="PN12.5"/></td>
-    <td><input class="col-price" value="${esc(r.price)}"  placeholder="0"/></td>
+    ${cols.map(c => `<td><input value="${esc(vals[c.id]||"")}" data-col="${c.id}" placeholder="${esc(c.label)}"/></td>`).join("")}
     <td><button class="del-btn" title="Устгах" onclick="delRow(this,'${key}')">
       <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
         <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
@@ -682,21 +459,116 @@ function rowHTML(r, i, key){
   </tr>`;
 }
 
+/* ============================================================
+   COLUMN MANAGER UI
+   ============================================================ */
+function colManagerHTML(key, cols){
+  const chips = cols.map(c => `
+    <div class="col-chip" id="chip-${key}-${c.id}">
+      <span>${esc(c.label)}</span>
+      <button class="col-chip-del" onclick="removeColumn('${key}','${c.id}')" title="Багана устгах">×</button>
+    </div>`).join("");
+
+  return `
+  <div class="col-manager" id="col-manager-${key}">
+    <span class="col-manager-label">Багана</span>
+    <div class="col-chips" id="col-chips-${key}">${chips}</div>
+    <button class="add-col-btn" id="add-col-btn-${key}" onclick="showAddColumn('${key}')">
+      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round">
+        <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
+      </svg>
+      Багана нэмэх
+    </button>
+    <div class="add-col-form" id="add-col-form-${key}">
+      <input class="add-col-input" id="add-col-input-${key}" placeholder="Багана нэр…"
+             onkeydown="if(event.key==='Enter')confirmAddColumn('${key}');if(event.key==='Escape')cancelAddColumn('${key}')"/>
+      <button class="add-col-ok" onclick="confirmAddColumn('${key}')">Нэмэх</button>
+      <button class="add-col-cancel" onclick="cancelAddColumn('${key}')" title="Болих">×</button>
+    </div>
+  </div>`;
+}
+
+function showAddColumn(key){
+  document.getElementById("add-col-form-"+key).classList.add("visible");
+  document.getElementById("add-col-btn-"+key).style.display = "none";
+  document.getElementById("add-col-input-"+key).focus();
+}
+function cancelAddColumn(key){
+  document.getElementById("add-col-form-"+key).classList.remove("visible");
+  document.getElementById("add-col-btn-"+key).style.display = "";
+  document.getElementById("add-col-input-"+key).value = "";
+}
+function confirmAddColumn(key){
+  const inp   = document.getElementById("add-col-input-"+key);
+  const label = inp.value.trim();
+  if(!label) return;
+
+  const id   = genId();
+  const cols = getCols(key);
+  cols.push({ id, label });
+  PROD_COLUMNS[key] = cols;
+
+  // Add th before last th
+  const headRow = document.querySelector(`#tbl-${key} thead tr`);
+  const newTh   = document.createElement("th");
+  newTh.textContent = label;
+  headRow.insertBefore(newTh, headRow.lastElementChild);
+
+  // Add input to every existing row
+  document.querySelectorAll(`#tbody-admin-${key} tr`).forEach(tr => {
+    const td = document.createElement("td");
+    td.innerHTML = `<input data-col="${id}" placeholder="${esc(label)}"/>`;
+    tr.insertBefore(td, tr.lastElementChild);
+  });
+
+  // Add chip
+  const chip = document.createElement("div");
+  chip.className = "col-chip";
+  chip.id = `chip-${key}-${id}`;
+  chip.innerHTML = `<span>${esc(label)}</span><button class="col-chip-del" onclick="removeColumn('${key}','${id}')" title="Багана устгах">×</button>`;
+  document.getElementById("col-chips-"+key).appendChild(chip);
+
+  cancelAddColumn(key);
+  showToast(`"${label}" багана нэмэгдлээ`);
+}
+
+function removeColumn(key, colId){
+  const cols = getCols(key);
+  if(cols.length <= 1){ showToast("Хамгийн багадаа нэг багана байх ёстой", true); return; }
+  const idx = cols.findIndex(c => c.id === colId);
+  if(idx === -1) return;
+  cols.splice(idx, 1);
+  PROD_COLUMNS[key] = cols;
+
+  // Remove from thead (offset +1 for № col)
+  const headRow = document.querySelector(`#tbl-${key} thead tr`);
+  headRow.children[idx+1]?.remove();
+
+  // Remove from each body row
+  document.querySelectorAll(`#tbody-admin-${key} tr`).forEach(tr => {
+    tr.children[idx+1]?.remove();
+  });
+
+  // Remove chip
+  document.getElementById(`chip-${key}-${colId}`)?.remove();
+}
+
+/* ============================================================
+   APPEND SECTION
+   ============================================================ */
 function appendSection(prod){
-  const key = prod.key;
-  const img = PROD_IMAGES[key] !== undefined ? PROD_IMAGES[key] : (prod.image || "");
+  const key  = prod.key;
+  const img  = PROD_IMAGES[key] !== undefined ? PROD_IMAGES[key] : (prod.image||"");
+  const cols = getCols(key);
+
+  const theadCells = cols.map(c => `<th>${esc(c.label)}</th>`).join("");
+  const tbodyRows  = (prod.items||[]).map((r,i) => rowHTML(r,i,key)).join("");
 
   const html = `
   <div class="section-card" id="section-${key}">
     <div class="section-head">
-
-      <!-- Image thumbnail (click to change) -->
-      <div class="prod-img-thumb"
-           onclick="document.getElementById('img-input-${key}').click()"
-           title="Зураг солих">
-        <img src="${img}" alt="" id="img-preview-${key}"
-             onerror="this.style.opacity='.2'"
-             ${img ? "" : 'style="opacity:.2"'}/>
+      <div class="prod-img-thumb" onclick="document.getElementById('img-input-${key}').click()" title="Зураг солих">
+        <img src="${img}" alt="" id="img-preview-${key}" onerror="this.style.opacity='.2'" ${img?"":"style='opacity:.2'"} />
         <div class="img-overlay">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round">
             <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
@@ -704,27 +576,21 @@ function appendSection(prod){
           </svg>
         </div>
       </div>
-      <input type="file" id="img-input-${key}" accept="image/*" style="display:none"
-             onchange="handleProdImageChange(this,'${key}')"/>
+      <input type="file" id="img-input-${key}" accept="image/*" style="display:none" onchange="handleProdImageChange(this,'${key}')"/>
 
-      <!-- Editable meta fields -->
       <div class="section-meta">
-        <input class="meta-input meta-name-input"  id="meta-name-${key}"
-               value="${esc(prod.name)}"  placeholder="Бүтээгдэхүүний нэр"/>
-        <input class="meta-input meta-desc-input"  id="meta-desc-${key}"
-               value="${esc(prod.desc)}"  placeholder="Тайлбар"/>
+        <input class="meta-input meta-name-input" id="meta-name-${key}" value="${esc(prod.name)}" placeholder="Бүтээгдэхүүний нэр"/>
+        <input class="meta-input meta-desc-input" id="meta-desc-${key}" value="${esc(prod.desc)}" placeholder="Тайлбар"/>
         <div class="meta-badge-row">
-          <input class="meta-input meta-badge-input" id="meta-badge-${key}"
-                 value="${esc(prod.badge)}" placeholder="Badge текст"/>
+          <input class="meta-input meta-badge-input" id="meta-badge-${key}" value="${esc(prod.badge)}" placeholder="Badge текст"/>
           <select class="meta-badge-type-select" id="meta-badge-type-${key}">
-            <option value="cw"${prod.badgeType==="cw" ? " selected" : ""}>Navy</option>
-            <option value="hw"${prod.badgeType==="hw" ? " selected" : ""}>Red</option>
+            <option value="cw"${prod.badgeType==="cw"?" selected":""}>Navy</option>
+            <option value="hw"${prod.badgeType==="hw"?" selected":""}>Red</option>
           </select>
         </div>
       </div>
 
       <div class="section-head-spacer"></div>
-
       <div class="section-head-actions">
         <button class="add-row-btn" onclick="addRow('${key}')">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
@@ -742,22 +608,18 @@ function appendSection(prod){
           Устгах
         </button>
       </div>
-    </div><!-- /section-head -->
+    </div>
+
+    ${colManagerHTML(key, cols)}
 
     <div class="section-body">
       <table class="admin-table" id="tbl-${key}">
         <thead><tr>
           <th>№</th>
-          <th class="col-code">Барааны код</th>
-          <th class="col-size">Хэмжээ</th>
-          <th class="col-class">S класс</th>
-          <th class="col-pn">PN</th>
-          <th class="col-price">Нэгж үнэ (₮)</th>
+          ${theadCells}
           <th></th>
         </tr></thead>
-        <tbody id="tbody-admin-${key}">
-          ${(prod.items||[]).map((r,i) => rowHTML(r,i,key)).join("")}
-        </tbody>
+        <tbody id="tbody-admin-${key}">${tbodyRows}</tbody>
       </table>
     </div>
 
@@ -780,17 +642,20 @@ function appendSection(prod){
 function renderAllSections(products){
   const container = document.getElementById("product-sections");
   container.innerHTML = "";
-  if(!products || products.length === 0){
+  if(!products||products.length===0){
     container.innerHTML = `<div class="empty-state" id="empty-state">
       <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
         <rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 3H8"/>
       </svg>
-      <p>Бүтээгдэхүүн байхгүй байна.<br/>Дээрх "Шинэ бүтээгдэхүүн нэмэх" хэсгийг ашиглана уу.</p>
+      <p>Бүтээгдэхүүн байхгүй байна.<br/>Дээрх хэсгийг ашиглан нэмнэ үү.</p>
     </div>`;
     return;
   }
   products.forEach(prod => {
-    PROD_IMAGES[prod.key] = prod.image || "";
+    PROD_IMAGES[prod.key]  = prod.image || "";
+    PROD_COLUMNS[prod.key] = prod.columns && prod.columns.length
+      ? prod.columns
+      : JSON.parse(JSON.stringify(DEFAULT_COLUMNS));
     appendSection(prod);
   });
 }
@@ -802,20 +667,20 @@ function addRow(key){
   const tbody = document.getElementById("tbody-admin-"+key);
   if(!tbody) return;
   const i = tbody.rows.length;
-  tbody.insertAdjacentHTML("beforeend", rowHTML({ code:"", size:"", sclass:"", pn:"", price:"0" }, i, key));
+  const emptyVals = {};
+  getCols(key).forEach(c => { emptyVals[c.id] = ""; });
+  tbody.insertAdjacentHTML("beforeend", rowHTML(emptyVals, i, key));
   updateRowNums(key);
-  tbody.lastElementChild.querySelector("input").focus();
+  tbody.lastElementChild.querySelector("input")?.focus();
 }
-
 function delRow(btn, key){
   btn.closest("tr").remove();
   updateRowNums(key);
 }
-
 function updateRowNums(key){
   const tbody = document.getElementById("tbody-admin-"+key);
   if(!tbody) return;
-  Array.from(tbody.rows).forEach((tr, i) => {
+  Array.from(tbody.rows).forEach((tr,i) => {
     const td = tr.querySelector(".row-num");
     if(td) td.textContent = i+1;
   });
@@ -827,13 +692,12 @@ function updateRowNums(key){
 function deleteProduct(key){
   const name = document.getElementById("meta-name-"+key)?.value || key;
   if(!confirm(`"${name}" бүтээгдэхүүнийг устгах уу?\nЭнэ үйлдлийг буцаах боломжгүй.`)) return;
-
   document.getElementById("section-"+key)?.remove();
   delete PROD_IMAGES[key];
-
+  delete PROD_COLUMNS[key];
   if(DB){
     DB.ref("products/"+key).remove()
-      .then(() => showToast(`"${name}" устгагдлаа`))
+      .then(()  => showToast(`"${name}" устгагдлаа`))
       .catch(err => showToast("Устгахад алдаа: "+err.message, true));
   } else {
     showToast(`"${name}" устгагдлаа (локал)`);
@@ -844,38 +708,35 @@ function deleteProduct(key){
    READ TABLE
    ============================================================ */
 function readTable(key){
+  const cols  = getCols(key);
   const tbody = document.getElementById("tbody-admin-"+key);
   if(!tbody) return [];
   return Array.from(tbody.rows).map(tr => {
-    const inputs = tr.querySelectorAll("input");
-    return {
-      code:   inputs[0]?.value.trim() || "",
-      size:   inputs[1]?.value.trim() || "",
-      sclass: inputs[2]?.value.trim() || "",
-      pn:     inputs[3]?.value.trim() || "",
-      price:  inputs[4]?.value.trim() || "0"
-    };
-  }).filter(r => r.code || r.size);
+    const vals = {};
+    cols.forEach(c => {
+      const inp = tr.querySelector(`input[data-col="${c.id}"]`);
+      vals[c.id] = inp ? inp.value.trim() : "";
+    });
+    return vals;
+  }).filter(r => Object.values(r).some(v => v !== ""));
 }
 
 /* ============================================================
-   SAVE SECTION  (writes full product object to Firebase)
+   SAVE
    ============================================================ */
 function saveSection(key){
   const btn  = document.getElementById("sbtn-"+key);
   const lbl  = document.getElementById("lbl-"+key);
-
   const name      = document.getElementById("meta-name-"+key)?.value.trim()      || "";
   const desc      = document.getElementById("meta-desc-"+key)?.value.trim()      || "";
   const badge     = document.getElementById("meta-badge-"+key)?.value.trim()     || "";
   const badgeType = document.getElementById("meta-badge-type-"+key)?.value       || "cw";
-  const image     = PROD_IMAGES[key] || "";
+  const image     = PROD_IMAGES[key]  || "";
+  const columns   = getCols(key);
   const items     = readTable(key);
+  const productData = { name, desc, badge, badgeType, image, columns, items };
 
-  const productData = { name, desc, badge, badgeType, image, items };
-
-  btn.classList.add("saving");
-  lbl.textContent = "Хадгалж байна…";
+  btn.classList.add("saving"); lbl.textContent = "Хадгалж байна…";
 
   if(!DB){
     setTimeout(() => {
@@ -885,7 +746,6 @@ function saveSection(key){
     }, 400);
     return;
   }
-
   DB.ref("products/"+key).set(productData)
     .then(() => {
       btn.classList.remove("saving");
@@ -900,7 +760,7 @@ function saveSection(key){
 }
 
 /* ============================================================
-   FIREBASE INIT
+   FIREBASE
    ============================================================ */
 function initFirebase(){
   if(FB_CONFIG.apiKey === "YOUR_API_KEY"){
@@ -910,17 +770,12 @@ function initFirebase(){
     renderAllSections(DEFAULT_PRODUCTS);
     return;
   }
-
   function loadScript(src, cb){
     const s = document.createElement("script");
     s.src = src; s.onload = cb;
-    s.onerror = () => {
-      showToast("Firebase SDK ачаалагдсангүй", true);
-      renderAllSections(DEFAULT_PRODUCTS);
-    };
+    s.onerror = () => { showToast("Firebase SDK ачаалагдсангүй", true); renderAllSections(DEFAULT_PRODUCTS); };
     document.head.appendChild(s);
   }
-
   const base = "https://www.gstatic.com/firebasejs/9.23.0/";
   loadScript(base+"firebase-app-compat.js", () => {
     loadScript(base+"firebase-database-compat.js", () => {
@@ -931,58 +786,47 @@ function initFirebase(){
           const data = snap.val();
           if(data && typeof data === "object"){
             const prods = Object.entries(data).map(([key, val]) => {
+              let cols  = DEFAULT_COLUMNS;
+              let items = [];
+              let name  = key, desc = "", badge = "", badgeType = "cw", image = "";
+
               if(val && typeof val === "object" && !Array.isArray(val) && val.name){
-                // New format: {name, desc, badge, badgeType, image, items}
-                let items = val.items;
-                if(items && !Array.isArray(items)) items = Object.values(items);
-                return {
-                  key,
-                  name:      val.name      || "",
-                  desc:      val.desc      || "",
-                  badge:     val.badge     || "",
-                  badgeType: val.badgeType || "cw",
-                  image:     val.image     || "",
-                  items:     items         || []
-                };
+                // New format
+                name      = val.name || "";
+                desc      = val.desc || "";
+                badge     = val.badge || "";
+                badgeType = val.badgeType || "cw";
+                image     = val.image || "";
+                items     = Array.isArray(val.items) ? val.items : Object.values(val.items||{});
+                // Restore columns if saved
+                if(val.columns){
+                  cols = Array.isArray(val.columns) ? val.columns : Object.values(val.columns);
+                }
               } else {
-                // Legacy format: items array stored directly
-                const def   = DEFAULT_PRODUCTS.find(p => p.key === key);
-                const items = Array.isArray(val)
-                  ? val
-                  : (val && typeof val === "object" ? Object.values(val) : []);
-                return {
-                  key,
-                  name:      def ? def.name      : key,
-                  desc:      def ? def.desc      : "",
-                  badge:     def ? def.badge     : "",
-                  badgeType: def ? def.badgeType : "cw",
-                  image:     def ? def.image     : "",
-                  items
-                };
+                // Legacy: items array
+                const def = DEFAULT_PRODUCTS.find(p => p.key === key);
+                if(def){ name=def.name; desc=def.desc; badge=def.badge; badgeType=def.badgeType; image=def.image; }
+                items = Array.isArray(val) ? val : Object.values(val||{});
               }
+              return { key, name, desc, badge, badgeType, image, columns:cols, items };
             });
-
-            // Sort: cw first, hw second, then rest
-            prods.sort((a, b) => {
-              const order = ["cw","hw"];
-              const ai = order.indexOf(a.key), bi = order.indexOf(b.key);
-              if(ai !== -1 && bi !== -1) return ai - bi;
-              if(ai !== -1) return -1;
-              if(bi !== -1) return 1;
-              return 0;
+            prods.sort((a,b) => {
+              const o=["cw","hw"];
+              const ai=o.indexOf(a.key), bi=o.indexOf(b.key);
+              if(ai!==-1&&bi!==-1) return ai-bi;
+              if(ai!==-1) return -1; if(bi!==-1) return 1; return 0;
             });
-
             renderAllSections(prods);
           } else {
             renderAllSections(DEFAULT_PRODUCTS);
           }
         }).catch(err => {
-          console.error("Firebase read error:", err);
+          console.error(err);
           showToast("Firebase уншихад алдаа гарлаа", true);
           renderAllSections(DEFAULT_PRODUCTS);
         });
       } catch(e){
-        console.error("Firebase init error:", e);
+        console.error(e);
         renderAllSections(DEFAULT_PRODUCTS);
       }
     });
@@ -993,9 +837,7 @@ function initFirebase(){
    TOAST
    ============================================================ */
 function showToast(msg, isError=false){
-  const t  = document.getElementById("toast");
-  const m  = document.getElementById("toast-msg");
-  const ic = document.getElementById("toast-icon");
+  const t=document.getElementById("toast"), m=document.getElementById("toast-msg"), ic=document.getElementById("toast-icon");
   m.textContent = msg;
   t.classList.toggle("error", isError);
   ic.innerHTML = isError
