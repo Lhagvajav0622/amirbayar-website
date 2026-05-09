@@ -1633,9 +1633,8 @@ function renderProductCards(){
             <div class="price-table-hdr-t">${p.name} — Үнийн жагсаалт</div>
           </div>
           <table class="price-table">
-            <thead><tr>
-              <th>№</th><th>Барааны код</th><th>Хэмжээ</th>
-              <th>S класс</th><th>PN</th><th>Нэгж үнэ (₮)</th>
+            <thead><tr id="thead-${p.key}">
+              <th>№</th>${(p.columns||[{id:'code',label:'Барааны код'},{id:'size',label:'Хэмжээ'},{id:'sclass',label:'S класс'},{id:'pn',label:'PN'},{id:'price',label:'Нэгж үнэ (₮)'}]).map(c=>`<th>${c.label}</th>`).join('')}
             </tr></thead>
             <tbody id="tbody-${p.key}"></tbody>
           </table>
@@ -1651,14 +1650,21 @@ function renderTable(key){
   if(!tbody) return;
   const prod = LIVE_PRODUCTS.find(p => p.key === key);
   const rows = prod ? (prod.items || []) : [];
+  const cols = prod && prod.columns && prod.columns.length
+    ? prod.columns
+    : [{id:'code',label:'Барааны код'},{id:'size',label:'Хэмжээ'},{id:'sclass',label:'S класс'},{id:'pn',label:'PN'},{id:'price',label:'Нэгж үнэ (₮)'}];
   tbody.innerHTML = rows.map((r,i) => `
     <tr>
       <td>${i+1}</td>
-      <td class="td-code">${r.code}</td>
-      <td class="td-size">${r.size}</td>
-      <td><span class="td-class">${r.sclass}</span></td>
-      <td><span class="td-pn">${r.pn}</span></td>
-      <td class="td-price">${r.price}<span class="cur">₮</span></td>
+      ${cols.map(c => {
+        const val = r[c.id] !== undefined && r[c.id] !== '' ? r[c.id] : '—';
+        if(c.id==='sclass') return `<td><span class="td-class">${val}</span></td>`;
+        if(c.id==='pn')     return `<td><span class="td-pn">${val}</span></td>`;
+        if(c.id==='price')  return `<td class="td-price">${val}<span class="cur">₮</span></td>`;
+        if(c.id==='code')   return `<td class="td-code">${val}</td>`;
+        if(c.id==='size')   return `<td class="td-size">${val}</td>`;
+        return `<td>${val}</td>`;
+      }).join('')}
     </tr>`).join("");
 }
 
