@@ -563,6 +563,20 @@ section{position:relative;}
 .products-head{max-width:780px;margin-bottom:48px;}
 .products-sub{margin-top:18px;font-size:15px;color:#54607a;line-height:1.65;}
 
+/* Search */
+.prod-search-wrap{display:flex;align-items:center;gap:16px;margin-bottom:32px;flex-wrap:wrap;}
+.prod-search-box{position:relative;flex:1;min-width:260px;max-width:520px;}
+.prod-search-icon{position:absolute;left:16px;top:50%;transform:translateY(-50%);color:#8a97b0;pointer-events:none;}
+.prod-search-input{width:100%;padding:14px 44px 14px 48px;border:1.5px solid #dde5f2;border-radius:12px;font-size:15px;font-family:'Inter',sans-serif;color:var(--navy);background:#fff;outline:none;transition:border-color .2s,box-shadow .2s;box-sizing:border-box;}
+.prod-search-input:focus{border-color:var(--red);box-shadow:0 0 0 3px rgba(204,30,30,.1);}
+.prod-search-input::placeholder{color:#a0aec0;}
+.prod-search-clear{position:absolute;right:14px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;color:#8a97b0;padding:4px;border-radius:6px;display:flex;align-items:center;transition:color .2s;}
+.prod-search-clear:hover{color:var(--red);}
+.prod-search-count{font-size:13px;color:#8a97b0;white-space:nowrap;}
+.prod-no-results{display:flex;flex-direction:column;align-items:center;gap:16px;padding:60px 0;color:#8a97b0;font-size:15px;}
+.prod-card.search-hidden{display:none;}
+.prod-card mark{background:rgba(204,30,30,.15);color:var(--red);border-radius:3px;padding:0 2px;}
+
 /* 2-card layout */
 .prod-cards{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-bottom:48px;}
 @media(max-width:760px){.prod-cards{grid-template-columns:1fr;}}
@@ -1217,8 +1231,23 @@ footer{
       <p class="products-sub reveal">Халуун болон хүйтэн усны PPR хоолой — EN ISO 15874:2013, DIN 8077/8078 стандарт. Үнийн хүснэгтийг үзэхийн тулд бүтээгдэхүүн дээр дарна уу.</p>
     </div>
 
+    <div class="prod-search-wrap reveal">
+      <div class="prod-search-box">
+        <svg class="prod-search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input type="text" id="prod-search-input" class="prod-search-input" placeholder="Бүтээгдэхүүн хайх... (жш: булан, муфьт, ф20)">
+        <button class="prod-search-clear" id="prod-search-clear" onclick="clearSearch()" style="display:none">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+      <div class="prod-search-count" id="prod-search-count"></div>
+    </div>
+
     <div class="prod-cards" id="prod-cards-container">
       <!-- product cards rendered dynamically by JS -->
+    </div>
+    <div class="prod-no-results" id="prod-no-results" style="display:none">
+      <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#b0bacf" stroke-width="1.5" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <p>Хайлтад тохирох бүтээгдэхүүн олдсонгүй</p>
     </div>
 
     <div id="price-cta" class="price-cta reveal">
@@ -1614,7 +1643,7 @@ function renderProductCards(){
   const container = document.getElementById("prod-cards-container");
   if(!container) return;
   container.innerHTML = LIVE_PRODUCTS.map((p, i) => `
-    <div class="prod-card reveal" data-tilt${i > 0 ? ` data-delay="${(i*0.12).toFixed(2)}s"` : ""}>
+    <div class="prod-card reveal" data-key="${p.key}" data-tilt${i > 0 ? ` data-delay="${(i*0.12).toFixed(2)}s"` : ""}>
       <div class="shine"></div>
       <div class="prod-card-img">
         <img src="${p.image}" alt="${p.name}" onerror="this.style.opacity='.3'"/>
@@ -1643,6 +1672,7 @@ function renderProductCards(){
     </div>`).join("");
   rebindCards();
   observeReveal();
+  initSearch();
 }
 
 function renderTable(key){
@@ -1666,6 +1696,42 @@ function renderTable(key){
         return `<td>${val}</td>`;
       }).join('')}
     </tr>`).join("");
+}
+
+/* ── SEARCH ── */
+function filterProducts(q){
+  q = q.trim().toLowerCase();
+  const cards = document.querySelectorAll('#prod-cards-container .prod-card');
+  const noRes = document.getElementById('prod-no-results');
+  const cnt   = document.getElementById('prod-search-count');
+  const clr   = document.getElementById('prod-search-clear');
+  if(clr) clr.style.display = q ? '' : 'none';
+  let visible = 0;
+  cards.forEach(card => {
+    const key   = card.dataset.key || '';
+    const prod  = LIVE_PRODUCTS.find(p => p.key === key);
+    if(!prod){ card.classList.add('search-hidden'); return; }
+    const hay = [prod.name, prod.desc, prod.badge,
+      ...(prod.items||[]).map(r => Object.values(r).join(' '))
+    ].join(' ').toLowerCase();
+    const match = !q || hay.includes(q);
+    card.classList.toggle('search-hidden', !match);
+    if(match) visible++;
+  });
+  if(noRes) noRes.style.display = (q && visible===0) ? '' : 'none';
+  if(cnt)   cnt.textContent = q ? `${visible} бүтээгдэхүүн олдлоо` : '';
+}
+
+function clearSearch(){
+  const inp = document.getElementById('prod-search-input');
+  if(inp){ inp.value=''; inp.focus(); }
+  filterProducts('');
+}
+
+function initSearch(){
+  const inp = document.getElementById('prod-search-input');
+  if(!inp) return;
+  inp.addEventListener('input', e => filterProducts(e.target.value));
 }
 
 function toggleTable(key){
