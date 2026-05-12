@@ -1,7 +1,6 @@
 <!doctype html>
 <html lang="mn">
 <head>
-  <base href="/">
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
 <title>Амирбаяр ХХК — PPR хоолой, фитингний найдвартай нийлүүлэгч</title>
@@ -427,6 +426,13 @@ p{margin:0;}
   .hero-cert-strip{position:static;padding:14px 5%;}
   .hero-cert-row{gap:12px;font-size:9px;}
   .par-layer{display:none;}
+  .price-table-inner{padding:0 10px 16px;}
+  .price-table{font-size:11px;}
+  .price-table thead th{padding:8px 8px;font-size:9px;letter-spacing:.05em;}
+  .price-table tbody td{padding:8px 8px;}
+  .price-table .td-price{font-size:13px;}
+  .price-table .td-class,.price-table .td-pn{font-size:9px;padding:2px 5px;}
+  .price-table-hdr-t{font-size:11px;}
 }
 
 /* ============================ SECTIONS ============================ */
@@ -625,7 +631,7 @@ section{position:relative;}
 /* Price table collapse */
 .price-table-wrap{overflow:hidden;max-height:0;transition:max-height .5s var(--ease),opacity .3s ease;opacity:0;}
 .price-table-wrap.open{max-height:1400px;opacity:1;}
-.price-table-inner{border-top:2px solid var(--red);padding:0 28px 28px;}
+.price-table-inner{border-top:2px solid var(--red);padding:0 28px 28px;overflow-x:auto;-webkit-overflow-scrolling:touch;}
 .price-table-hdr{display:flex;align-items:center;justify-content:space-between;padding:16px 0 12px;}
 .price-table-hdr-t{font-family:'Inter',sans-serif;font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--navy);}
 
@@ -1883,6 +1889,7 @@ function tryLoadFirebase(){
                   badge:     val.badge     || "",
                   badgeType: val.badgeType || "cw",
                   image:     val.image     || "",
+                  columns:   Array.isArray(val.columns) ? val.columns : undefined,
                   items:     Array.isArray(val.items) ? val.items : Object.values(val.items || {})
                 };
               }
